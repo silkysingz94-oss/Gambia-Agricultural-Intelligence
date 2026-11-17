@@ -8,7 +8,6 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
 <style>
@@ -19,7 +18,7 @@
   --muted:#718078;
   --border:#dfe8e2;
   --bg:#f1f5f2;
-  --white:#ffffff;
+  --white:#fff;
 }
 * {box-sizing:border-box}
 body {
@@ -44,12 +43,16 @@ header {
   background:#239565;font-weight:800;font-size:20px;
 }
 .brand h1 {font-size:15px;margin:0;font-weight:800}
-.brand small {font-size:9px;color:#c5ded0;display:block;margin-top:3px}
-.header-right {font-size:10px;color:#d4e7dc;text-align:right;line-height:1.7}
+.brand small {
+  font-size:9px;color:#c5ded0;display:block;margin-top:3px
+}
+.header-right {
+  font-size:10px;color:#d4e7dc;text-align:right;line-height:1.7
+}
 main {
   height:calc(100vh - 66px);
   display:grid;
-  grid-template-columns:minmax(255px,1fr) minmax(360px,1fr) minmax(280px,1fr);
+  grid-template-columns:minmax(260px,1fr) minmax(360px,1fr) minmax(290px,1fr);
   gap:10px;
   padding:10px;
 }
@@ -68,129 +71,110 @@ main {
   flex-direction:column;
 }
 .section {
-  font-size:11px;
-  font-weight:800;
-  color:var(--green);
-  letter-spacing:.5px;
-  text-transform:uppercase;
+  font-size:11px;font-weight:800;color:var(--green);
+  letter-spacing:.5px;text-transform:uppercase;
   margin:15px 0 9px;
 }
 .section:first-child {margin-top:2px}
 .sub {
-  font-size:10px;
-  color:var(--muted);
-  line-height:1.55;
+  font-size:10px;color:var(--muted);line-height:1.55
 }
 label {
-  display:block;
-  font-size:10px;
-  font-weight:650;
-  margin:9px 0 5px;
-  color:#53665b;
+  display:block;font-size:10px;font-weight:650;
+  margin:9px 0 5px;color:#53665b
 }
 select,input {
-  width:100%;
-  border:1px solid var(--border);
-  border-radius:7px;
-  padding:9px;
-  background:white;
-  font-family:inherit;
-  font-size:10px;
-  color:var(--dark);
+  width:100%;border:1px solid var(--border);
+  border-radius:7px;padding:9px;background:white;
+  font-family:inherit;font-size:10px;color:var(--dark)
 }
 button {
-  border:0;
-  border-radius:7px;
-  padding:10px 11px;
-  font-family:inherit;
-  font-size:10px;
-  font-weight:750;
-  cursor:pointer;
+  border:0;border-radius:7px;padding:10px 11px;
+  font-family:inherit;font-size:10px;font-weight:750;
+  cursor:pointer
 }
 .primary {background:var(--green);color:white}
 .secondary {background:#e9f2ed;color:var(--green)}
 .dark {background:#203c30;color:white}
-.danger {background:#fcebea;color:#a33b35}
 button:disabled {opacity:.5;cursor:not-allowed}
 .btnrow {display:flex;gap:7px;margin-top:9px}
 .btnrow button {flex:1}
 .upload {
-  background:#f8fbf9;
-  border:1px dashed #a9c6b5;
-  padding:10px;
-  border-radius:8px;
+  background:#f8fbf9;border:1px dashed #a9c6b5;
+  padding:10px;border-radius:8px
 }
 .kpis {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
+  display:grid;grid-template-columns:1fr 1fr;gap:8px
 }
 .kpi {
-  background:#f4f8f5;
-  border:1px solid #e4eee7;
-  border-radius:8px;
-  padding:10px;
+  background:#f4f8f5;border:1px solid #e4eee7;
+  border-radius:8px;padding:10px;min-width:0
 }
 .kpi small {font-size:9px;color:var(--muted)}
 .kpi strong {
-  display:block;
-  color:var(--green);
-  font-size:19px;
-  margin-top:5px;
-  overflow-wrap:anywhere;
+  display:block;color:var(--green);font-size:18px;
+  margin-top:5px;overflow-wrap:anywhere
 }
 .kpi span {font-size:9px;color:var(--muted)}
 hr {border:0;border-top:1px solid var(--border);margin:13px 0}
 .map-toolbar {
-  padding:11px;
-  border-bottom:1px solid var(--border);
-  background:white;
+  padding:11px;border-bottom:1px solid var(--border);
+  background:white
 }
 .map-toolbar strong {font-size:12px}
 .map-toolbar small {font-size:9px;color:var(--muted)}
-.map-row {display:flex;justify-content:space-between;gap:8px;align-items:center}
+.map-row {
+  display:flex;justify-content:space-between;
+  gap:8px;align-items:center
+}
 #map {flex:1;min-height:300px;width:100%}
 #status,#message {
-  font-size:10px;
-  color:var(--green);
-  line-height:1.5;
-  margin-top:6px;
+  font-size:10px;color:var(--green);
+  line-height:1.5;margin-top:6px
 }
-.chartbox {height:210px;margin:9px 0 15px}
+.chartbox {height:215px;margin:9px 0 15px;position:relative}
 .legend {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
+  display:grid;grid-template-columns:1fr 1fr;gap:8px
 }
-.legend-item {font-size:9px;display:flex;align-items:center;gap:7px}
+.legend-item {
+  font-size:9px;display:flex;align-items:center;gap:7px
+}
 .swatch {width:12px;height:12px;border-radius:3px;flex:none}
 table {width:100%;border-collapse:collapse;font-size:9px}
-td,th {padding:7px 5px;border-bottom:1px solid var(--border);text-align:left}
+td,th {
+  padding:7px 5px;border-bottom:1px solid var(--border);
+  text-align:left
+}
 th {color:var(--muted);font-weight:600}
 td:last-child,th:last-child {text-align:right}
 .note {
-  background:#fff8e8;
-  border:1px solid #f0e4c5;
-  color:#705a27;
-  padding:10px;
-  border-radius:8px;
-  font-size:9px;
-  line-height:1.6;
+  background:#fff8e8;border:1px solid #f0e4c5;
+  color:#705a27;padding:10px;border-radius:8px;
+  font-size:9px;line-height:1.6
 }
 footer {
   font-size:9px;color:var(--muted);
-  line-height:1.7;margin-top:15px;
+  line-height:1.7;margin-top:15px
 }
 .progress {
   width:100%;height:7px;background:#e6eee8;
-  border-radius:10px;overflow:hidden;margin-top:8px;
+  border-radius:10px;overflow:hidden;margin-top:8px
 }
 #progressBar {
-  height:100%;width:0%;
-  background:var(--green2);
-  transition:width .2s;
+  height:100%;width:0%;background:var(--green2);
+  transition:width .2s
 }
 .statusline {font-size:9px;color:var(--muted);margin-top:5px}
+.control-check {
+  display:flex;align-items:center;gap:7px;
+  font-size:10px;font-weight:500
+}
+.control-check input {width:auto;margin:0}
+.area-tag {
+  display:inline-block;padding:4px 7px;
+  background:#e9f2ed;color:var(--green);
+  border-radius:5px;font-size:9px;font-weight:700
+}
 @media(max-width:1000px) {
   main {height:auto;grid-template-columns:1fr}
   .panel {max-height:none}
@@ -218,28 +202,29 @@ footer {
 
 <main>
 
-<!-- =====================================================
-     LEFT: CONTROLS
-====================================================== -->
-
+<!-- LEFT: CONTROLS -->
 <section class="panel">
 
   <div class="section">01. Data connection</div>
 
   <div class="upload">
     <div class="sub">Data repository</div>
-    <strong style="font-size:10px">silkysingz94-oss / Gambia-Agricultural-Intelligence</strong>
+    <strong style="font-size:10px">
+      silkysingz94-oss / Gambia-Agricultural-Intelligence
+    </strong>
     <div class="sub" style="margin-top:5px">
-      Data are fetched from the public GitHub repository.
+      Boundary and annual classified GeoTIFF data are fetched directly from GitHub.
     </div>
-    <div id="connectionStatus" class="statusline">Waiting for connection...</div>
+    <div id="connectionStatus" class="statusline">
+      Waiting for connection...
+    </div>
   </div>
 
   <div class="section">02. Administrative selection</div>
 
   <label>Region</label>
   <select id="regionSelect">
-    <option value="">All regions</option>
+    <option value="">All regions / National</option>
   </select>
 
   <label>District</label>
@@ -252,12 +237,20 @@ footer {
     <option value="">All wards</option>
   </select>
 
-  <div class="btnrow">
-    <button class="primary" id="applyArea">Apply AOI</button>
-    <button class="secondary" id="resetArea">Reset</button>
+  <div class="sub" style="margin-top:6px">
+    Select a region, district or ward. Lower-level selections are filtered by the parent selection.
   </div>
 
-  <div class="section">03. LULC classification</div>
+  <div class="btnrow">
+    <button class="primary" id="applyArea">APPLY AREA</button>
+    <button class="secondary" id="resetArea">RESET AREA</button>
+  </div>
+
+  <div style="margin-top:9px">
+    <span class="area-tag" id="areaLabel">National analysis</span>
+  </div>
+
+  <div class="section">03. LULC analysis</div>
 
   <label>Classification year</label>
   <select id="yearSelect">
@@ -279,14 +272,14 @@ footer {
     <option value="2025">2025</option>
   </select>
 
-  <label>Classification code scheme</label>
-  <select id="classScheme">
-    <option value="agri">GBoS agricultural classes (0–5)</option>
-    <option value="worldcover">WorldCover-derived classes (0–5)</option>
-  </select>
-
-  <div class="sub" style="margin-top:5px">
-    Choose the class-code scheme matching the values stored in your GeoTIFFs.
+  <div class="note" style="margin-top:9px">
+    <b>Corrected raster class interpretation</b><br>
+    0 Water<br>
+    1 Built-up<br>
+    2 Woodland<br>
+    3 Grassland<br>
+    4 Wetland<br>
+    5 Bare land
   </div>
 
   <div class="btnrow">
@@ -302,18 +295,18 @@ footer {
   <div class="section">04. Map layers</div>
 
   <label class="control-check">
-    <input type="checkbox" id="showBoundary" checked style="width:auto">
+    <input type="checkbox" id="showBoundary" checked>
     Administrative boundaries
   </label>
 
   <label class="control-check">
-    <input type="checkbox" id="showRaster" checked style="width:auto">
+    <input type="checkbox" id="showRaster" checked>
     LULC classification
   </label>
 
   <label class="control-check">
-    <input type="checkbox" id="showEA" style="width:auto">
-    Enumeration area boundaries
+    <input type="checkbox" id="showEA">
+    Selected EA boundaries
   </label>
 
   <label>Basemap</label>
@@ -326,15 +319,15 @@ footer {
   <div class="section">05. Exports</div>
 
   <button class="primary" id="exportClassCSV" style="width:100%;margin-bottom:7px">
-    Export LULC statistics CSV
+    Export selected-area LULC CSV
   </button>
 
-  <button class="secondary" id="exportSelected" style="width:100%;margin-bottom:7px">
-    Export selected AOI GeoJSON
-  </button>
-
-  <button class="secondary" id="exportAnnualCSV" style="width:100%">
+  <button class="secondary" id="exportAnnualCSV" style="width:100%;margin-bottom:7px">
     Export annual comparison CSV
+  </button>
+
+  <button class="secondary" id="exportSelected" style="width:100%">
+    Export selected AOI GeoJSON
   </button>
 
   <div id="message"></div>
@@ -342,17 +335,14 @@ footer {
 </section>
 
 
-<!-- =====================================================
-     CENTRE: MAP
-====================================================== -->
-
+<!-- CENTRE: MAP -->
 <section class="panel map-panel">
 
   <div class="map-toolbar">
     <div class="map-row">
       <div>
         <strong>02. Interactive LULC map</strong><br>
-        <small>Gambia • Annual land-cover mapping</small>
+        <small>Gambia • Administrative-area land-cover analysis</small>
       </div>
       <button class="secondary" id="zoomGambia">Zoom to Gambia</button>
     </div>
@@ -364,54 +354,55 @@ footer {
 </section>
 
 
-<!-- =====================================================
-     RIGHT: ANALYTICS
-====================================================== -->
-
+<!-- RIGHT: ANALYTICS -->
 <section class="panel">
 
-  <div class="section">03. Agricultural intelligence</div>
+  <div class="section">03. Administrative statistics</div>
 
-  <div class="kpis">
+  <div class="sub" id="analysisAreaText">
+    Current analysis: National
+  </div>
+
+  <div class="kpis" style="margin-top:9px">
     <div class="kpi">
-      <small>Enumeration areas</small>
+      <small>Selected EA features</small>
       <strong id="eaCount">0</strong>
-      <span>Selected boundary features</span>
+      <span>Enumeration areas</span>
     </div>
     <div class="kpi">
-      <small>Selected population</small>
+      <small>Population</small>
       <strong id="population">0</strong>
-      <span>Sum of EA population field</span>
+      <span>Sum of selected EA population</span>
     </div>
     <div class="kpi">
       <small>Households</small>
       <strong id="households">0</strong>
-      <span>Sum of EA household field</span>
+      <span>Sum of selected EA households</span>
     </div>
     <div class="kpi">
-      <small>Raster pixel size</small>
-      <strong id="pixelSize">—</strong>
-      <span>GeoTIFF resolution</span>
+      <small>Valid raster pixels</small>
+      <strong id="validPixels">—</strong>
+      <span>Within selected analysis area</span>
     </div>
   </div>
 
-  <div class="section">04. Selected-year class statistics</div>
+  <div class="section">04. Selected-year land-cover statistics</div>
 
   <div class="kpis">
-    <div class="kpi">
-      <small>Cropland area</small>
-      <strong id="cropArea">—</strong>
-      <span>Hectares</span>
-    </div>
-    <div class="kpi">
-      <small>Vegetated area</small>
-      <strong id="vegetationArea">—</strong>
-      <span>Hectares</span>
-    </div>
     <div class="kpi">
       <small>Built-up area</small>
       <strong id="builtArea">—</strong>
       <span>Hectares</span>
+    </div>
+    <div class="kpi">
+      <small>Wetland area</small>
+      <strong id="wetlandArea">—</strong>
+      <span>Hectares</span>
+    </div>
+    <div class="kpi">
+      <small>Vegetation area</small>
+      <strong id="vegetationArea">—</strong>
+      <span>Woodland + grassland</span>
     </div>
     <div class="kpi">
       <small>Water area</small>
@@ -425,12 +416,12 @@ footer {
     <canvas id="classChart"></canvas>
   </div>
 
-  <div class="section">06. Annual LULC trends</div>
+  <div class="section">06. Annual land-cover trends</div>
   <div class="chartbox">
     <canvas id="trendChart"></canvas>
   </div>
 
-  <div class="section">07. Selected year statistics</div>
+  <div class="section">07. Selected-area statistics</div>
 
   <table>
     <thead>
@@ -445,21 +436,21 @@ footer {
     </tbody>
   </table>
 
-  <div class="section">08. Classification legend</div>
-
-  <div id="legend" class="legend"></div>
-
-  <div class="section">09. Change analysis</div>
+  <div class="section">08. Year comparison</div>
   <div class="chartbox">
     <canvas id="changeChart"></canvas>
   </div>
 
-  <div class="note">
-    Statistics are calculated from the classified raster pixels. Area calculations require a projected raster with metre-based pixel dimensions, such as EPSG:32628. Selected administrative population and household statistics are calculated from the uploaded EA attributes.
+  <div class="section">09. Classification legend</div>
+  <div id="legend" class="legend"></div>
+
+  <div class="note" style="margin-top:14px">
+    <b>Spatial analysis method</b><br>
+    The selected region, district or ward is represented by its EA polygons. Raster pixel centres are tested against the selected administrative geometry. Only pixels inside that geometry contribute to the selected-area class counts, areas and percentages.
   </div>
 
   <div class="note" style="margin-top:8px">
-    The current repository contains six classified years: 2000, 2005, 2010, 2015, 2020 and 2025. Annual trends between these dates are comparisons of available snapshots, not observations for every intervening year.
+    The repository provides classified GeoTIFF snapshots for 2000, 2005, 2010, 2015, 2020 and 2025. This dashboard interprets the existing class values and calculates statistics; it does not retrain a new satellite-image classifier.
   </div>
 
   <footer>
@@ -470,35 +461,33 @@ footer {
   </footer>
 
 </section>
-
 </main>
 
 
-<!-- =====================================================
-     LIBRARIES
-====================================================== -->
-
+<!-- LIBRARIES -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/georaster"></script>
 <script src="https://unpkg.com/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.2.0/turf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/proj4@2.12.1/dist/proj4.js"></script>
 
 
 <script>
+"use strict";
 
 // ============================================================
 // 1. REPOSITORY CONFIGURATION
 // ============================================================
 
-const OWNER = 'silkysingz94-oss';
-const REPO = 'Gambia-Agricultural-Intelligence';
-const BRANCH = 'main';
+const OWNER = "silkysingz94-oss";
+const REPO = "Gambia-Agricultural-Intelligence";
+const BRANCH = "main";
 
-const RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}`;
+const RAW =
+  `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}`;
 
-const YEARS = [2000,2005,2010,2015,2020,2025];
+const YEARS = [2000, 2005, 2010, 2015, 2020, 2025];
 
 const FILES = {
   boundary: `${RAW}/Census_EAs_Geo.json`,
@@ -507,45 +496,39 @@ const FILES = {
 
 
 // ============================================================
-// 2. CLASSIFICATION SCHEMES
+// 2. CORRECTED CLASSIFICATION
 // ============================================================
 
-const SCHEMES = {
+const CLASSES = [
+  {id:0, name:"Water",     color:"#2878b5"},
+  {id:1, name:"Built-up",  color:"#d94d43"},
+  {id:2, name:"Woodland",  color:"#176b45"},
+  {id:3, name:"Grassland", color:"#8cbe63"},
+  {id:4, name:"Wetland",   color:"#59aeb1"},
+  {id:5, name:"Bare land", color:"#c9a27b"}
+];
 
-  agri: [
-    {id:0,name:'Water',color:'#2878b5'},
-    {id:1,name:'Cropland',color:'#e6b94c'},
-    {id:2,name:'Woodland',color:'#176b45'},
-    {id:3,name:'Grassland',color:'#8cbe63'},
-    {id:4,name:'Built-up',color:'#d94d43'},
-    {id:5,name:'Bare land',color:'#c9a27b'}
-  ],
-
-  worldcover: [
-    {id:0,name:'Water',color:'#2878b5'},
-    {id:1,name:'Built-up',color:'#d94d43'},
-    {id:2,name:'Vegetation',color:'#176b45'},
-    {id:3,name:'Cropland',color:'#e6b94c'},
-    {id:4,name:'Bare land',color:'#c9a27b'},
-    {id:5,name:'Wetlands',color:'#59aeb1'}
-  ]
-
-};
+const CLASS_COLORS = {};
+CLASSES.forEach(c => CLASS_COLORS[c.id] = c.color);
 
 
 // ============================================================
-// 3. STATE
+// 3. GLOBAL STATE
 // ============================================================
 
 let map;
 let baseLayers = {};
+
 let boundaryData = null;
 let boundaryLayer = null;
 let eaLayer = null;
 let rasterLayer = null;
 let activeRaster = null;
+
+let selectedFeatures = null;
 let annualStats = {};
 let selectedStats = null;
+
 let classChart = null;
 let trendChart = null;
 let changeChart = null;
@@ -556,187 +539,226 @@ let wardField = null;
 let populationField = null;
 let householdField = null;
 
-let selectedFeatures = null;
 let analysisRunning = false;
+let rasterProjection = null;
 
 
 // ============================================================
-// 4. MAP INITIALISATION
-// ============================================================
-
-map = L.map('map',{
-  center:[13.45,-15.4],
-  zoom:8,
-  preferCanvas:true
-});
-
-baseLayers.satellite = L.tileLayer(
-  'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-  {attribution:'© Esri'}
-);
-
-baseLayers.street = L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {attribution:'© OpenStreetMap'}
-);
-
-baseLayers.terrain = L.tileLayer(
-  'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
-  {attribution:'© OpenTopoMap'}
-);
-
-baseLayers.satellite.addTo(map);
-
-document.getElementById('basemapSelect').onchange = function() {
-  Object.values(baseLayers).forEach(layer => map.removeLayer(layer));
-  baseLayers[this.value].addTo(map);
-};
-
-document.getElementById('zoomGambia').onclick = () => {
-  map.setView([13.45,-15.4],8);
-};
-
-
-// ============================================================
-// 5. GENERAL HELPERS
+// 4. DOM HELPERS
 // ============================================================
 
 function el(id) {
   return document.getElementById(id);
 }
 
-function message(text) {
-  el('message').textContent = text;
+function setStatus(value) {
+  el("status").textContent = value;
 }
 
-function status(text) {
-  el('status').textContent = text;
+function setMessage(value) {
+  el("message").textContent = value;
 }
 
-function progress(value,text) {
-  el('progressBar').style.width = value + '%';
-  el('progressText').textContent = text;
+function setProgress(value, label) {
+  el("progressBar").style.width =
+    Math.max(0, Math.min(100, value)) + "%";
+
+  el("progressText").textContent = label;
 }
 
-function number(value,digits=1) {
-  if (!Number.isFinite(value)) return '—';
-  return value.toLocaleString(undefined,{
-    maximumFractionDigits:digits
+function formatNumber(value, digits = 1) {
+  if (!Number.isFinite(value)) return "—";
+
+  return value.toLocaleString(undefined, {
+    maximumFractionDigits: digits
   });
 }
 
-function getScheme() {
-  return SCHEMES[el('classScheme').value];
+function downloadFile(content, filename, type) {
+  const blob = new Blob([content], {type});
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
 }
 
-function formatArea(value) {
-  return number(value,1);
+function nextFrame() {
+  return new Promise(resolve => setTimeout(resolve, 0));
 }
 
-function findField(properties,candidates) {
+async function fetchChecked(url) {
+  const response = await fetch(url, {cache:"no-cache"});
+
+  if (!response.ok) {
+    throw new Error(
+      `HTTP ${response.status}: ${url}`
+    );
+  }
+
+  return response;
+}
+
+function findField(properties, candidates) {
   const keys = Object.keys(properties || {});
+
   for (const candidate of candidates) {
     const found = keys.find(
       key => key.toLowerCase() === candidate.toLowerCase()
     );
+
     if (found) return found;
   }
+
   return null;
 }
 
-function download(content,filename,type) {
-  const blob = new Blob([content],{type});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  a.click();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-}
 
-async function fetchWithError(url) {
-  const response = await fetch(url,{cache:'no-cache'});
-  if (!response.ok) {
-    throw new Error(
-      'HTTP ' + response.status + ' while retrieving ' + url
-    );
-  }
-  return response;
-}
+// ============================================================
+// 5. MAP INITIALISATION
+// ============================================================
+
+map = L.map("map", {
+  center:[13.45, -15.4],
+  zoom:8,
+  preferCanvas:true
+});
+
+baseLayers.satellite = L.tileLayer(
+  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+  {attribution:"Tiles © Esri"}
+);
+
+baseLayers.street = L.tileLayer(
+  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  {attribution:"© OpenStreetMap"}
+);
+
+baseLayers.terrain = L.tileLayer(
+  "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+  {attribution:"© OpenTopoMap"}
+);
+
+baseLayers.satellite.addTo(map);
+
+el("basemapSelect").addEventListener("change", function() {
+  Object.values(baseLayers).forEach(layer => {
+    if (map.hasLayer(layer)) map.removeLayer(layer);
+  });
+
+  baseLayers[this.value].addTo(map);
+});
+
+el("zoomGambia").addEventListener("click", () => {
+  map.setView([13.45, -15.4], 8);
+});
 
 
 // ============================================================
-// 6. LOAD ADMINISTRATIVE GEOJSON FROM GITHUB
+// 6. LOAD ADMINISTRATIVE DATA
 // ============================================================
 
 async function loadBoundaries() {
+  el("connectionStatus").textContent =
+    "Downloading administrative GeoJSON...";
 
-  el('connectionStatus').textContent =
-    'Downloading Census_EAs_Geo.json...';
+  setStatus("Loading Gambia EA boundaries...");
 
-  status('Loading Gambia administrative boundaries...');
-
-  const response = await fetchWithError(FILES.boundary);
+  const response = await fetchChecked(FILES.boundary);
   boundaryData = await response.json();
 
-  if (boundaryData.type !== 'FeatureCollection') {
-    throw new Error('Boundary file is not a GeoJSON FeatureCollection.');
+  if (
+    !boundaryData ||
+    boundaryData.type !== "FeatureCollection" ||
+    !Array.isArray(boundaryData.features)
+  ) {
+    throw new Error("Invalid administrative GeoJSON FeatureCollection.");
   }
 
-  const features = boundaryData.features || [];
-
-  if (!features.length) {
-    throw new Error('The boundary GeoJSON contains no features.');
+  if (!boundaryData.features.length) {
+    throw new Error("The administrative GeoJSON contains no features.");
   }
 
-  const p = features[0].properties || {};
+  const firstProperties =
+    boundaryData.features.find(f => f.properties)?.properties || {};
 
-  regionField = findField(p,['RCO','region','regionname']);
-  districtField = findField(p,['distname','district','districtname']);
-  wardField = findField(p,['wardname','ward']);
-  populationField = findField(p,['sum_pop','population','pop']);
-  householdField = findField(p,['sum_hhs','households','hh']);
+  regionField = findField(
+    firstProperties,
+    ["RCO", "region", "regionname"]
+  );
+
+  districtField = findField(
+    firstProperties,
+    ["distname", "district", "districtname"]
+  );
+
+  wardField = findField(
+    firstProperties,
+    ["wardname", "ward"]
+  );
+
+  populationField = findField(
+    firstProperties,
+    ["sum_pop", "population", "pop"]
+  );
+
+  householdField = findField(
+    firstProperties,
+    ["sum_hhs", "households", "hh"]
+  );
+
+  if (!regionField || !districtField || !wardField) {
+    throw new Error(
+      "Could not identify region, district and ward fields in the GeoJSON."
+    );
+  }
 
   populateRegions();
 
-  boundaryLayer = L.geoJSON(boundaryData,{
-    style:{
-      color:'#ffffff',
+  boundaryLayer = L.geoJSON(boundaryData, {
+    style: {
+      color:"#ffffff",
       weight:0.5,
       fillOpacity:0
     },
-    onEachFeature:function(feature,layer) {
-      const props = feature.properties || {};
+    onEachFeature:function(feature, layer) {
+      const p = feature.properties || {};
 
-      const html = [
-        ['Region',regionField],
-        ['District',districtField],
-        ['Ward',wardField],
-        ['Population',populationField],
-        ['Households',householdField]
-      ].filter(item=>item[1]).map(item =>
-        '<b>' + item[0] + ':</b> ' +
-        String(props[item[1]] ?? 'N/A')
-      ).join('<br>');
+      const popup = [
+        `<b>Region:</b> ${p[regionField] ?? "N/A"}`,
+        `<b>District:</b> ${p[districtField] ?? "N/A"}`,
+        `<b>Ward:</b> ${p[wardField] ?? "N/A"}`,
+        `<b>Population:</b> ${p[populationField] ?? "N/A"}`,
+        `<b>Households:</b> ${p[householdField] ?? "N/A"}`
+      ].join("<br>");
 
-      layer.bindPopup(html || 'Administrative area');
+      layer.bindPopup(popup);
     }
   });
 
   boundaryLayer.addTo(map);
 
-  el('connectionStatus').textContent =
-    'Connected • ' + features.length.toLocaleString() + ' EA features';
+  selectedFeatures = {
+    type:"FeatureCollection",
+    features:boundaryData.features.slice()
+  };
 
-  el('eaCount').textContent = features.length.toLocaleString();
+  el("connectionStatus").textContent =
+    `Connected • ${boundaryData.features.length.toLocaleString()} EA features`;
 
   updateAdministrativeStats();
+  updateAreaLabel();
 
-  if (boundaryLayer.getBounds().isValid()) {
-    map.fitBounds(boundaryLayer.getBounds(),{padding:[10,10]});
+  const bounds = boundaryLayer.getBounds();
+
+  if (bounds.isValid()) {
+    map.fitBounds(bounds, {padding:[12,12]});
   }
-
-  message('Gambia administrative boundary successfully retrieved from GitHub.');
 }
 
 
@@ -744,146 +766,238 @@ async function loadBoundaries() {
 // 7. ADMINISTRATIVE SELECTORS
 // ============================================================
 
-function uniqueValues(features,field) {
-  if (!field) return [];
-  return [...new Set(
-    features.map(f=>f.properties?.[field])
-      .filter(v=>v!==null && v!==undefined && v!=='')
-  )].sort((a,b)=>String(a).localeCompare(String(b)));
+function uniqueSorted(features, field) {
+  const values = new Set();
+
+  features.forEach(feature => {
+    const value = feature.properties?.[field];
+
+    if (value !== null && value !== undefined && String(value).trim()) {
+      values.add(String(value));
+    }
+  });
+
+  return Array.from(values).sort((a,b) =>
+    a.localeCompare(b, undefined, {numeric:true})
+  );
 }
 
-function setOptions(select,values,firstLabel) {
-  select.innerHTML = '';
-  select.add(new Option(firstLabel,''));
-  values.forEach(v=>select.add(new Option(String(v),String(v))));
+function setOptions(select, values, firstLabel) {
+  const previous = select.value;
+
+  select.innerHTML = "";
+
+  const first = document.createElement("option");
+  first.value = "";
+  first.textContent = firstLabel;
+  select.appendChild(first);
+
+  values.forEach(value => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = value;
+    select.appendChild(option);
+  });
+
+  if (values.includes(previous)) {
+    select.value = previous;
+  }
 }
 
 function populateRegions() {
-  setOptions(
-    el('regionSelect'),
-    uniqueValues(boundaryData.features,regionField),
-    'All regions'
-  );
-  updateDistricts();
-}
-
-function updateDistricts() {
-  let features = boundaryData.features;
-  const region = el('regionSelect').value;
-
-  if (region && regionField) {
-    features = features.filter(
-      f=>String(f.properties[regionField])===region
-    );
-  }
-
-  setOptions(
-    el('districtSelect'),
-    uniqueValues(features,districtField),
-    'All districts'
+  const values = uniqueSorted(
+    boundaryData.features,
+    regionField
   );
 
-  updateWards();
+  setOptions(
+    el("regionSelect"),
+    values,
+    "All regions / National"
+  );
+
+  updateDistrictOptions();
 }
 
-function updateWards() {
+function updateDistrictOptions() {
+  if (!boundaryData) return;
+
+  const region = el("regionSelect").value;
+
   let features = boundaryData.features;
 
-  const region = el('regionSelect').value;
-  const district = el('districtSelect').value;
-
-  if (region && regionField) {
-    features = features.filter(
-      f=>String(f.properties[regionField])===region
+  if (region) {
+    features = features.filter(f =>
+      String(f.properties?.[regionField]) === region
     );
   }
 
-  if (district && districtField) {
-    features = features.filter(
-      f=>String(f.properties[districtField])===district
-    );
-  }
+  const districts = uniqueSorted(features, districtField);
 
   setOptions(
-    el('wardSelect'),
-    uniqueValues(features,wardField),
-    'All wards'
+    el("districtSelect"),
+    districts,
+    "All districts"
+  );
+
+  updateWardOptions();
+}
+
+function updateWardOptions() {
+  if (!boundaryData) return;
+
+  const region = el("regionSelect").value;
+  const district = el("districtSelect").value;
+
+  let features = boundaryData.features;
+
+  if (region) {
+    features = features.filter(f =>
+      String(f.properties?.[regionField]) === region
+    );
+  }
+
+  if (district) {
+    features = features.filter(f =>
+      String(f.properties?.[districtField]) === district
+    );
+  }
+
+  const wards = uniqueSorted(features, wardField);
+
+  setOptions(
+    el("wardSelect"),
+    wards,
+    "All wards"
   );
 }
 
-el('regionSelect').onchange = updateDistricts;
-el('districtSelect').onchange = updateWards;
+el("regionSelect").addEventListener("change", () => {
+  el("districtSelect").value = "";
+  el("wardSelect").value = "";
+  updateDistrictOptions();
+});
+
+el("districtSelect").addEventListener("change", () => {
+  el("wardSelect").value = "";
+  updateWardOptions();
+});
 
 
 // ============================================================
-// 8. APPLY ADMINISTRATIVE FILTER
+// 8. APPLY ADMINISTRATIVE AREA
 // ============================================================
+
+function getSelectedAreaName() {
+  const region = el("regionSelect").value;
+  const district = el("districtSelect").value;
+  const ward = el("wardSelect").value;
+
+  if (ward) return `Ward: ${ward}`;
+  if (district) return `District: ${district}`;
+  if (region) return `Region: ${region}`;
+
+  return "National analysis";
+}
+
+function updateAreaLabel() {
+  const name = getSelectedAreaName();
+
+  el("areaLabel").textContent = name;
+  el("analysisAreaText").textContent =
+    `Current analysis: ${name}`;
+}
 
 function applyArea() {
   if (!boundaryData) return;
 
+  const region = el("regionSelect").value;
+  const district = el("districtSelect").value;
+  const ward = el("wardSelect").value;
+
   let features = boundaryData.features;
 
-  const region = el('regionSelect').value;
-  const district = el('districtSelect').value;
-  const ward = el('wardSelect').value;
-
-  if (region && regionField) {
-    features = features.filter(
-      f=>String(f.properties[regionField])===region
+  if (region) {
+    features = features.filter(f =>
+      String(f.properties?.[regionField]) === region
     );
   }
 
-  if (district && districtField) {
-    features = features.filter(
-      f=>String(f.properties[districtField])===district
+  if (district) {
+    features = features.filter(f =>
+      String(f.properties?.[districtField]) === district
     );
   }
 
-  if (ward && wardField) {
-    features = features.filter(
-      f=>String(f.properties[wardField])===ward
+  if (ward) {
+    features = features.filter(f =>
+      String(f.properties?.[wardField]) === ward
     );
+  }
+
+  if (!features.length) {
+    setMessage("No EA features found for this administrative selection.");
+    return;
   }
 
   selectedFeatures = {
-    type:'FeatureCollection',
-    features
+    type:"FeatureCollection",
+    features:features
   };
 
-  if (eaLayer) map.removeLayer(eaLayer);
+  if (eaLayer && map.hasLayer(eaLayer)) {
+    map.removeLayer(eaLayer);
+  }
 
-  eaLayer = L.geoJSON(selectedFeatures,{
-    style:{
-      color:'#f4d35e',
-      weight:1,
-      fillOpacity:0.02
+  eaLayer = L.geoJSON(selectedFeatures, {
+    style: {
+      color:"#f4d35e",
+      weight:1.2,
+      fillColor:"#f4d35e",
+      fillOpacity:0.04
     }
   });
 
-  if (el('showEA').checked) eaLayer.addTo(map);
+  if (el("showEA").checked) {
+    eaLayer.addTo(map);
+  }
 
-  if (features.length && eaLayer.getBounds().isValid()) {
-    map.fitBounds(eaLayer.getBounds(),{padding:[15,15]});
+  const bounds = eaLayer.getBounds();
+
+  if (bounds.isValid()) {
+    map.fitBounds(bounds, {padding:[18,18]});
   }
 
   updateAdministrativeStats();
+  updateAreaLabel();
 
-  message(
-    features.length.toLocaleString() +
-    ' administrative features selected.'
+  // Previously calculated results no longer apply to the new AOI.
+  annualStats = {};
+  selectedStats = null;
+
+  clearAnalysisDisplay();
+
+  setMessage(
+    `${features.length.toLocaleString()} EA features selected. Run analysis to calculate LULC statistics for this area.`
   );
+
+  setStatus(`Selected area: ${getSelectedAreaName()}`);
 }
 
-el('applyArea').onclick = applyArea;
+el("applyArea").addEventListener("click", applyArea);
 
-el('resetArea').onclick = function() {
-  el('regionSelect').value = '';
-  el('districtSelect').value = '';
-  updateDistricts();
+el("resetArea").addEventListener("click", () => {
+  el("regionSelect").value = "";
+  updateDistrictOptions();
+
+  el("districtSelect").value = "";
+  updateWardOptions();
+
+  el("wardSelect").value = "";
+
   applyArea();
-  map.setView([13.45,-15.4],8);
-};
+  map.setView([13.45, -15.4], 8);
+});
 
 
 // ============================================================
@@ -900,8 +1014,8 @@ function updateAdministrativeStats() {
   let population = 0;
   let households = 0;
 
-  features.forEach(f=>{
-    const p = f.properties || {};
+  features.forEach(feature => {
+    const p = feature.properties || {};
 
     const pop = Number(p[populationField]);
     const hh = Number(p[householdField]);
@@ -910,51 +1024,232 @@ function updateAdministrativeStats() {
     if (Number.isFinite(hh)) households += hh;
   });
 
-  el('eaCount').textContent = features.length.toLocaleString();
-  el('population').textContent = number(population,0);
-  el('households').textContent = number(households,0);
+  el("eaCount").textContent =
+    features.length.toLocaleString();
+
+  el("population").textContent =
+    formatNumber(population, 0);
+
+  el("households").textContent =
+    formatNumber(households, 0);
 }
 
 
 // ============================================================
-// 10. CLASSIFICATION LEGEND
+// 10. LEGEND
 // ============================================================
 
 function drawLegend() {
-  const scheme = getScheme();
-
-  el('legend').innerHTML = scheme.map(c=>`
+  el("legend").innerHTML = CLASSES.map(c => `
     <div class="legend-item">
       <span class="swatch" style="background:${c.color}"></span>
       ${c.id} — ${c.name}
     </div>
-  `).join('');
+  `).join("");
 }
-
-el('classScheme').onchange = function() {
-  drawLegend();
-  message('Class-code interpretation changed. Run analysis again.');
-};
 
 drawLegend();
 
 
 // ============================================================
-// 11. FETCH AND PARSE GEOTIFF
+// 11. PROJECTION DEFINITIONS
+// ============================================================
+
+function registerProjection(epsg) {
+  const code = Number(epsg);
+
+  if (code === 4326) return "EPSG:4326";
+  if (code === 3857) return "EPSG:3857";
+
+  // UTM northern hemisphere.
+  if (code >= 32601 && code <= 32660) {
+    const zone = code - 32600;
+
+    proj4.defs(
+      `EPSG:${code}`,
+      `+proj=utm +zone=${zone} +datum=WGS84 +units=m +no_defs`
+    );
+
+    return `EPSG:${code}`;
+  }
+
+  // UTM southern hemisphere.
+  if (code >= 32701 && code <= 32760) {
+    const zone = code - 32700;
+
+    proj4.defs(
+      `EPSG:${code}`,
+      `+proj=utm +zone=${zone} +south +datum=WGS84 +units=m +no_defs`
+    );
+
+    return `EPSG:${code}`;
+  }
+
+  if (proj4.defs(`EPSG:${code}`)) {
+    return `EPSG:${code}`;
+  }
+
+  throw new Error(
+    `Unsupported or unrecognised raster projection EPSG:${code}.`
+  );
+}
+
+
+// ============================================================
+// 12. TRANSFORM SELECTED AOI TO RASTER COORDINATES
+// ============================================================
+
+function transformCoordinate(coord, projection) {
+  const transformed = proj4(
+    "EPSG:4326",
+    projection,
+    [Number(coord[0]), Number(coord[1])]
+  );
+
+  return [transformed[0], transformed[1]];
+}
+
+function transformRing(ring, projection) {
+  return ring.map(coord =>
+    transformCoordinate(coord, projection)
+  );
+}
+
+function getFeaturePolygons(feature, projection) {
+  const geometry = feature.geometry;
+
+  if (!geometry) return [];
+
+  if (geometry.type === "Polygon") {
+    return [
+      geometry.coordinates.map(ring =>
+        transformRing(ring, projection)
+      )
+    ];
+  }
+
+  if (geometry.type === "MultiPolygon") {
+    return geometry.coordinates.map(polygon =>
+      polygon.map(ring => transformRing(ring, projection))
+    );
+  }
+
+  return [];
+}
+
+function createAOIMaskGeometry(features, projection) {
+  const polygons = [];
+
+  let minX = Infinity;
+  let minY = Infinity;
+  let maxX = -Infinity;
+  let maxY = -Infinity;
+
+  for (const feature of features) {
+    const featurePolygons =
+      getFeaturePolygons(feature, projection);
+
+    featurePolygons.forEach(polygon => {
+      if (!polygon.length || !polygon[0].length) return;
+
+      polygons.push(polygon);
+
+      polygon.forEach(ring => {
+        ring.forEach(coord => {
+          minX = Math.min(minX, coord[0]);
+          minY = Math.min(minY, coord[1]);
+          maxX = Math.max(maxX, coord[0]);
+          maxY = Math.max(maxY, coord[1]);
+        });
+      });
+    });
+  }
+
+  if (!polygons.length) {
+    throw new Error(
+      "The selected administrative area has no supported polygon geometry."
+    );
+  }
+
+  return {
+    polygons,
+    bbox:{minX,minY,maxX,maxY}
+  };
+}
+
+
+// ============================================================
+// 13. POINT-IN-POLYGON TEST
+// ============================================================
+
+function pointInRing(x, y, ring) {
+  let inside = false;
+
+  for (
+    let i = 0, j = ring.length - 1;
+    i < ring.length;
+    j = i++
+  ) {
+    const xi = ring[i][0];
+    const yi = ring[i][1];
+
+    const xj = ring[j][0];
+    const yj = ring[j][1];
+
+    const intersects =
+      ((yi > y) !== (yj > y)) &&
+      (x < (xj - xi) * (y - yi) / ((yj - yi) || 1e-30) + xi);
+
+    if (intersects) inside = !inside;
+  }
+
+  return inside;
+}
+
+function pointInPolygonSet(x, y, polygons) {
+  for (const polygon of polygons) {
+    if (!polygon.length) continue;
+
+    const outerRing = polygon[0];
+
+    if (!pointInRing(x, y, outerRing)) continue;
+
+    let insideHole = false;
+
+    for (let h = 1; h < polygon.length; h++) {
+      if (pointInRing(x, y, polygon[h])) {
+        insideHole = true;
+        break;
+      }
+    }
+
+    if (!insideHole) return true;
+  }
+
+  return false;
+}
+
+
+// ============================================================
+// 14. LOAD GEOTIFF
 // ============================================================
 
 async function loadRaster(year) {
-  status('Downloading LULC ' + year + ' from GitHub...');
+  setStatus(`Downloading LULC ${year} from GitHub...`);
 
-  const response = await fetchWithError(FILES.raster(year));
+  const response = await fetchChecked(FILES.raster(year));
   const buffer = await response.arrayBuffer();
 
-  status('Decoding LULC ' + year + ' GeoTIFF...');
+  setStatus(`Decoding ${year} GeoTIFF...`);
 
   const raster = await parseGeoraster(buffer);
 
   if (!raster.values || !raster.values.length) {
-    throw new Error('No raster band found for year ' + year);
+    throw new Error(`No raster band found for ${year}.`);
+  }
+
+  if (!raster.width || !raster.height) {
+    throw new Error(`Invalid raster dimensions for ${year}.`);
   }
 
   return raster;
@@ -962,142 +1257,275 @@ async function loadRaster(year) {
 
 
 // ============================================================
-// 12. PIXEL-BASED CLASSIFICATION STATISTICS
+// 15. AREA CALCULATION
 // ============================================================
 
-function isNoData(value,raster) {
-  if (!Number.isFinite(value)) return true;
+function projectedPixelAreaHa(raster, epsg) {
+  const code = Number(epsg);
 
+  // UTM coordinates are in metres.
   if (
-    raster.noDataValue !== null &&
-    raster.noDataValue !== undefined &&
-    value === raster.noDataValue
-  ) return true;
-
-  return false;
-}
-
-function getRasterAreaFactor(raster) {
-  const px = Math.abs(Number(raster.pixelWidth));
-  const py = Math.abs(Number(raster.pixelHeight));
-
-  const projection = Number(raster.projection);
-
-  if (
-    Number.isFinite(px) &&
-    Number.isFinite(py) &&
-    projection === 32628
+    (code >= 32601 && code <= 32660) ||
+    (code >= 32701 && code <= 32760)
   ) {
-    return (px * py) / 10000;
-  }
-
-  if (
-    Number.isFinite(px) &&
-    Number.isFinite(py) &&
-    projection >= 32601 &&
-    projection <= 32660
-  ) {
-    return (px * py) / 10000;
+    return (
+      Math.abs(Number(raster.pixelWidth)) *
+      Math.abs(Number(raster.pixelHeight))
+    ) / 10000;
   }
 
   return null;
 }
 
-async function calculateRasterStats(raster,year) {
+function geographicPixelAreaHa(raster, row) {
+  const earthRadius = 6371008.8;
 
+  const lat1 = raster.ymax +
+    row * Number(raster.pixelHeight);
+
+  const lat2 = lat1 + Number(raster.pixelHeight);
+
+  const lonWidth =
+    Math.abs(Number(raster.pixelWidth)) *
+    Math.PI / 180;
+
+  const lat1Rad = lat1 * Math.PI / 180;
+  const lat2Rad = lat2 * Math.PI / 180;
+
+  const area =
+    earthRadius * earthRadius *
+    lonWidth *
+    Math.abs(Math.sin(lat1Rad) - Math.sin(lat2Rad));
+
+  return area / 10000;
+}
+
+
+// ============================================================
+// 16. SELECTED-AREA RASTER STATISTICS
+// ============================================================
+
+function isNoData(value, raster) {
+  if (value === null || value === undefined) return true;
+
+  const numberValue = Number(value);
+
+  if (!Number.isFinite(numberValue)) return true;
+
+  const noData = raster.noDataValue;
+
+  if (
+    noData !== null &&
+    noData !== undefined &&
+    Number.isFinite(Number(noData)) &&
+    numberValue === Number(noData)
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
+async function calculateRasterStats(raster, year) {
   const values = raster.values[0];
-  const height = raster.height;
+
   const width = raster.width;
+  const height = raster.height;
 
-  const scheme = getScheme();
+  const epsg = Number(raster.projection);
+
+  const projection = registerProjection(epsg);
+
+  const px = Math.abs(Number(raster.pixelWidth));
+  const py = Math.abs(Number(raster.pixelHeight));
+
+  if (!Number.isFinite(px) || !Number.isFinite(py) || px === 0 || py === 0) {
+    throw new Error(`Invalid pixel dimensions in ${year} raster.`);
+  }
+
+  const isNational =
+    !el("regionSelect").value &&
+    !el("districtSelect").value &&
+    !el("wardSelect").value;
+
+  let mask = null;
+
+  if (!isNational) {
+    const features = selectedFeatures?.features || [];
+
+    if (!features.length) {
+      throw new Error("No administrative features are selected.");
+    }
+
+    mask = createAOIMaskGeometry(features, projection);
+  }
+
+  // Limit pixel iteration to the selected AOI bounding rectangle.
+  let colStart = 0;
+  let colEnd = width;
+  let rowStart = 0;
+  let rowEnd = height;
+
+  if (mask) {
+    const b = mask.bbox;
+
+    colStart = Math.max(
+      0,
+      Math.floor((b.minX - raster.xmin) / px)
+    );
+
+    colEnd = Math.min(
+      width,
+      Math.ceil((b.maxX - raster.xmin) / px)
+    );
+
+    rowStart = Math.max(
+      0,
+      Math.floor((raster.ymax - b.maxY) / py)
+    );
+
+    rowEnd = Math.min(
+      height,
+      Math.ceil((raster.ymax - b.minY) / py)
+    );
+  }
+
   const counts = {};
+  const areas = {};
 
-  scheme.forEach(c=>counts[c.id]=0);
+  CLASSES.forEach(c => {
+    counts[c.id] = 0;
+    areas[c.id] = 0;
+  });
 
-  let valid = 0;
-  let unknown = 0;
+  let validPixels = 0;
+  let unknownPixels = 0;
+  let totalAreaHa = 0;
 
-  const allowed = new Set(scheme.map(c=>c.id));
+  const fixedAreaHa =
+    projectedPixelAreaHa(raster, epsg);
 
-  for (let y=0;y<height;y++) {
+  const useGeographicArea = epsg === 4326;
 
-    const row = values[y];
+  if (fixedAreaHa === null && !useGeographicArea) {
+    console.warn(
+      `Area units not calculated for unsupported area CRS EPSG:${epsg}`
+    );
+  }
 
-    for (let x=0;x<width;x++) {
+  const validCodes = new Set(CLASSES.map(c => c.id));
 
-      const raw = row[x];
+  for (let rowIndex = rowStart; rowIndex < rowEnd; rowIndex++) {
+    const row = values[rowIndex];
 
-      if (isNoData(raw,raster)) continue;
+    if (!row) continue;
+
+    const y = raster.ymax - (rowIndex + 0.5) * py;
+
+    const rowAreaHa = fixedAreaHa !== null
+      ? fixedAreaHa
+      : (useGeographicArea
+          ? geographicPixelAreaHa(raster, rowIndex)
+          : null);
+
+    for (
+      let colIndex = colStart;
+      colIndex < colEnd;
+      colIndex++
+    ) {
+      const raw = row[colIndex];
+
+      if (isNoData(raw, raster)) continue;
+
+      const x = raster.xmin + (colIndex + 0.5) * px;
+
+      // The selected administrative geometry controls the analysis.
+      if (
+        mask &&
+        !pointInPolygonSet(x, y, mask.polygons)
+      ) {
+        continue;
+      }
 
       const code = Math.round(Number(raw));
 
-      if (allowed.has(code)) {
-        counts[code]++;
-        valid++;
-      } else {
-        unknown++;
+      if (!validCodes.has(code)) {
+        unknownPixels++;
+        continue;
+      }
+
+      counts[code]++;
+      validPixels++;
+
+      if (rowAreaHa !== null) {
+        areas[code] += rowAreaHa;
+        totalAreaHa += rowAreaHa;
       }
     }
 
-    // Yield periodically so the browser can update progress.
-    if (y % 250 === 0) {
-      await new Promise(resolve=>setTimeout(resolve,0));
+    if ((rowIndex - rowStart) % 100 === 0) {
+      const completed = rowIndex - rowStart;
+      const totalRows = Math.max(1, rowEnd - rowStart);
+
+      const percent = 10 +
+        (completed / totalRows) * 70;
+
+      setProgress(
+        percent,
+        `Analysing ${year}: row ${rowIndex + 1} of ${height}`
+      );
+
+      await nextFrame();
     }
   }
 
-  const areaFactor = getRasterAreaFactor(raster);
-
-  const totalArea = areaFactor !== null
-    ? valid * areaFactor
-    : null;
-
-  const classes = scheme.map(c=>{
-    const count = counts[c.id] || 0;
-    const area = areaFactor !== null
-      ? count * areaFactor
-      : null;
-
-    return {
-      id:c.id,
-      name:c.name,
-      color:c.color,
-      pixels:count,
-      area:area,
-      percent:valid ? count / valid * 100 : 0
-    };
-  });
+  const classes = CLASSES.map(c => ({
+    id:c.id,
+    name:c.name,
+    color:c.color,
+    pixels:counts[c.id],
+    area:rowAreaAreaAvailable(fixedAreaHa, useGeographicArea)
+      ? areas[c.id]
+      : null,
+    percent:validPixels
+      ? (counts[c.id] / validPixels) * 100
+      : 0
+  }));
 
   return {
     year,
     width,
     height,
-    projection:raster.projection,
+    projection:epsg,
     pixelWidth:raster.pixelWidth,
     pixelHeight:raster.pixelHeight,
-    areaFactor,
-    validPixels:valid,
-    unknownPixels:unknown,
-    totalArea,
-    classes
+    validPixels,
+    unknownPixels,
+    totalArea:
+      rowAreaAreaAvailable(fixedAreaHa, useGeographicArea)
+        ? totalAreaHa
+        : null,
+    classes,
+    areaAvailable:
+      rowAreaAreaAvailable(fixedAreaHa, useGeographicArea),
+    analysisArea:getSelectedAreaName(),
+    isNational
   };
+}
+
+function rowAreaAreaAvailable(fixedAreaHa, geographicArea) {
+  return fixedAreaHa !== null || geographicArea;
 }
 
 
 // ============================================================
-// 13. DISPLAY SELECTED RASTER
+// 17. DISPLAY SELECTED RASTER
 // ============================================================
 
 function displayRaster(raster) {
-
-  if (rasterLayer) {
+  if (rasterLayer && map.hasLayer(rasterLayer)) {
     map.removeLayer(rasterLayer);
-    rasterLayer = null;
   }
-
-  const scheme = getScheme();
-
-  const colors = {};
-  scheme.forEach(c=>colors[c.id]=c.color);
 
   rasterLayer = new GeoRasterLayer({
     georaster:raster,
@@ -1111,85 +1539,106 @@ function displayRaster(raster) {
 
       const code = Math.round(value);
 
-      return colors[code] || 'rgba(0,0,0,0)';
+      return CLASS_COLORS[code] || "rgba(0,0,0,0)";
     }
   });
 
-  rasterLayer.addTo(map);
-
-  if (rasterLayer.getBounds) {
-    map.fitBounds(rasterLayer.getBounds());
+  if (el("showRaster").checked) {
+    rasterLayer.addTo(map);
   }
 
-  el('pixelSize').textContent =
-    number(Math.abs(raster.pixelWidth),1) + ' m';
+  const pixelWidth = Math.abs(Number(raster.pixelWidth));
+  const pixelHeight = Math.abs(Number(raster.pixelHeight));
+
+  el("pixelSize").textContent =
+    `${formatNumber(pixelWidth, 1)} × ${formatNumber(pixelHeight, 1)}`;
+
+  // Preserve selected administrative map extent.
+  if (selectedFeatures?.features?.length) {
+    if (eaLayer && eaLayer.getBounds().isValid()) {
+      map.fitBounds(eaLayer.getBounds(), {padding:[15,15]});
+    }
+  }
 }
 
 
 // ============================================================
-// 14. CLASS STATISTICS TABLE
+// 18. CLASS STATISTICS TABLE AND KPIs
 // ============================================================
 
 function updateClassTable(stats) {
-
-  const body = el('classTable');
-
-  body.innerHTML = stats.classes.map(c=>`
+  el("classTable").innerHTML = stats.classes.map(c => `
     <tr>
       <td>
-        <span style="display:inline-block;width:9px;height:9px;
-        border-radius:2px;background:${c.color};margin-right:5px"></span>
-        ${c.name}
+        <span style="
+          display:inline-block;
+          width:9px;
+          height:9px;
+          border-radius:2px;
+          background:${c.color};
+          margin-right:5px
+        "></span>
+        ${c.id} — ${c.name}
       </td>
-      <td>${c.area===null?'N/A':number(c.area,1)}</td>
-      <td>${number(c.percent,1)}%</td>
+      <td>${c.area === null ? "N/A" : formatNumber(c.area, 1)}</td>
+      <td>${formatNumber(c.percent, 1)}%</td>
     </tr>
-  `).join('');
+  `).join("");
 
-  const find = name =>
-    stats.classes.find(c=>c.name===name);
+  const findClass = id =>
+    stats.classes.find(c => c.id === id);
 
-  const crop = find('Cropland');
+  const built = findClass(1);
+  const woodland = findClass(2);
+  const grassland = findClass(3);
+  const wetland = findClass(4);
+  const water = findClass(0);
 
-  const vegetation = stats.classes.filter(c=>
-    ['Woodland','Grassland','Vegetation','Wetlands'].includes(c.name)
-  );
+  const vegetationArea =
+    woodland?.area !== null && grassland?.area !== null
+      ? woodland.area + grassland.area
+      : null;
 
-  const built = find('Built-up');
-  const water = find('Water');
+  el("builtArea").textContent =
+    built?.area === null || !built
+      ? "N/A"
+      : formatNumber(built.area, 1);
 
-  el('cropArea').textContent =
-    crop && crop.area!==null ? formatArea(crop.area) : 'N/A';
+  el("wetlandArea").textContent =
+    wetland?.area === null || !wetland
+      ? "N/A"
+      : formatNumber(wetland.area, 1);
 
-  el('vegetationArea').textContent =
-    vegetation.length && stats.areaFactor!==null
-      ? formatArea(vegetation.reduce((s,c)=>s+c.area,0))
-      : 'N/A';
+  el("vegetationArea").textContent =
+    vegetationArea === null
+      ? "N/A"
+      : formatNumber(vegetationArea, 1);
 
-  el('builtArea').textContent =
-    built && built.area!==null ? formatArea(built.area) : 'N/A';
+  el("waterArea").textContent =
+    water?.area === null || !water
+      ? "N/A"
+      : formatNumber(water.area, 1);
 
-  el('waterArea').textContent =
-    water && water.area!==null ? formatArea(water.area) : 'N/A';
+  el("validPixels").textContent =
+    stats.validPixels.toLocaleString();
 }
 
 
 // ============================================================
-// 15. CLASS COMPOSITION CHART
+// 19. CLASS COMPOSITION CHART
 // ============================================================
 
 function drawClassChart(stats) {
-
   if (classChart) classChart.destroy();
 
-  classChart = new Chart(el('classChart'),{
-    type:'doughnut',
+  classChart = new Chart(el("classChart"), {
+    type:"doughnut",
 
     data:{
-      labels:stats.classes.map(c=>c.name),
+      labels:stats.classes.map(c => c.name),
       datasets:[{
-        data:stats.classes.map(c=>c.percent),
-        backgroundColor:stats.classes.map(c=>c.color),
+        data:stats.classes.map(c => c.percent),
+        backgroundColor:stats.classes.map(c => c.color),
         borderWidth:1
       }]
     },
@@ -1199,14 +1648,16 @@ function drawClassChart(stats) {
       maintainAspectRatio:false,
       plugins:{
         legend:{
-          position:'bottom',
-          labels:{boxWidth:10,font:{size:9}}
+          position:"bottom",
+          labels:{
+            boxWidth:10,
+            font:{size:9}
+          }
         },
         tooltip:{
           callbacks:{
             label:function(context) {
-              return context.label + ': ' +
-                Number(context.raw).toFixed(2) + '%';
+              return `${context.label}: ${Number(context.raw).toFixed(2)}%`;
             }
           }
         }
@@ -1217,24 +1668,21 @@ function drawClassChart(stats) {
 
 
 // ============================================================
-// 16. ANNUAL CLASS AREA CHART
+// 20. ANNUAL CLASS AREA TREND
 // ============================================================
 
 function drawTrendChart() {
+  const years = YEARS.filter(y => annualStats[y]);
 
-  const years = YEARS.filter(y=>annualStats[y]);
-
-  const scheme = getScheme();
-
-  const datasets = scheme.map(c=>({
+  const datasets = CLASSES.map(c => ({
     label:c.name,
-    data:years.map(y=>{
-      const cls = annualStats[y].classes.find(x=>x.id===c.id);
-      return cls && cls.area!==null ? cls.area : null;
+    data:years.map(year => {
+      const item = annualStats[year].classes.find(x => x.id === c.id);
+      return item ? item.area : null;
     }),
     borderColor:c.color,
     backgroundColor:c.color,
-    tension:.25,
+    tension:0.25,
     borderWidth:2,
     pointRadius:3,
     spanGaps:false
@@ -1242,22 +1690,32 @@ function drawTrendChart() {
 
   if (trendChart) trendChart.destroy();
 
-  trendChart = new Chart(el('trendChart'),{
-    type:'line',
-    data:{labels:years,datasets},
+  trendChart = new Chart(el("trendChart"), {
+    type:"line",
+    data:{labels:years, datasets},
+
     options:{
       responsive:true,
       maintainAspectRatio:false,
-      interaction:{mode:'index',intersect:false},
+      interaction:{
+        mode:"index",
+        intersect:false
+      },
       plugins:{
         legend:{
-          position:'bottom',
-          labels:{boxWidth:9,font:{size:8}}
+          position:"bottom",
+          labels:{
+            boxWidth:9,
+            font:{size:8}
+          }
         }
       },
       scales:{
         y:{
-          title:{display:true,text:'Area (hectares)'},
+          title:{
+            display:true,
+            text:"Area (hectares)"
+          },
           ticks:{font:{size:9}}
         },
         x:{ticks:{font:{size:9}}}
@@ -1268,62 +1726,65 @@ function drawTrendChart() {
 
 
 // ============================================================
-// 17. COMPARISON CHART
+// 21. COMPARISON CHART
 // ============================================================
 
 function drawChangeChart() {
+  const year1 = Number(el("compareYear").value);
+  const year2 = Number(el("yearSelect").value);
 
-  const year1 = Number(el('compareYear').value);
-  const year2 = Number(el('yearSelect').value);
+  const first = annualStats[year1];
+  const second = annualStats[year2];
 
-  const a = annualStats[year1];
-  const b = annualStats[year2];
+  if (!first || !second) return;
 
-  if (!a || !b) return;
-
-  const scheme = getScheme();
-
-  const labels = scheme.map(c=>c.name);
-
-  const before = scheme.map(c=>{
-    const item = a.classes.find(x=>x.id===c.id);
-    return item?.area ?? null;
+  const before = CLASSES.map(c => {
+    const item = first.classes.find(x => x.id === c.id);
+    return item ? item.area : null;
   });
 
-  const after = scheme.map(c=>{
-    const item = b.classes.find(x=>x.id===c.id);
-    return item?.area ?? null;
+  const after = CLASSES.map(c => {
+    const item = second.classes.find(x => x.id === c.id);
+    return item ? item.area : null;
   });
 
   if (changeChart) changeChart.destroy();
 
-  changeChart = new Chart(el('changeChart'),{
-    type:'bar',
+  changeChart = new Chart(el("changeChart"), {
+    type:"bar",
+
     data:{
-      labels,
+      labels:CLASSES.map(c => c.name),
       datasets:[
         {
           label:String(year1),
           data:before,
-          backgroundColor:'#9eb6a8'
+          backgroundColor:"#9eb6a8"
         },
         {
           label:String(year2),
           data:after,
-          backgroundColor:'#176b45'
+          backgroundColor:"#176b45"
         }
       ]
     },
+
     options:{
       responsive:true,
       maintainAspectRatio:false,
       plugins:{
-        legend:{position:'bottom',labels:{font:{size:9}}}
+        legend:{
+          position:"bottom",
+          labels:{font:{size:9}}
+        }
       },
       scales:{
         x:{ticks:{font:{size:8}}},
         y:{
-          title:{display:true,text:'Area (ha)'},
+          title:{
+            display:true,
+            text:"Area (hectares)"
+          },
           ticks:{font:{size:9}}
         }
       }
@@ -1333,122 +1794,146 @@ function drawChangeChart() {
 
 
 // ============================================================
-// 18. RUN ANNUAL ANALYSIS
+// 22. CLEAR ANALYSIS DISPLAY
+// ============================================================
+
+function clearAnalysisDisplay() {
+  el("classTable").innerHTML =
+    '<tr><td colspan="3">Run analysis for the selected area.</td></tr>';
+
+  [
+    "builtArea",
+    "wetlandArea",
+    "vegetationArea",
+    "waterArea",
+    "validPixels"
+  ].forEach(id => {
+    el(id).textContent = "—";
+  });
+
+  if (classChart) {
+    classChart.destroy();
+    classChart = null;
+  }
+
+  if (trendChart) {
+    trendChart.destroy();
+    trendChart = null;
+  }
+
+  if (changeChart) {
+    changeChart.destroy();
+    changeChart = null;
+  }
+}
+
+
+// ============================================================
+// 23. RUN ANALYSIS FOR SELECTED ADMINISTRATIVE AREA
 // ============================================================
 
 async function runAnalysis() {
-
   if (analysisRunning) return;
 
+  if (!boundaryData || !selectedFeatures) {
+    setMessage("Administrative data are not yet loaded.");
+    return;
+  }
+
   analysisRunning = true;
-
-  el('runAnalysis').disabled = true;
-
-  annualStats = {};
-
-  const selectedYear = Number(el('yearSelect').value);
+  el("runAnalysis").disabled = true;
 
   try {
+    // Ensure current selector values are applied.
+    applyArea();
 
-    status('Starting annual LULC analysis...');
+    annualStats = {};
+    selectedStats = null;
 
-    for (let i=0;i<YEARS.length;i++) {
+    const selectedYear = Number(el("yearSelect").value);
 
+    setStatus(
+      `Starting analysis for ${getSelectedAreaName()}...`
+    );
+
+    for (let i = 0; i < YEARS.length; i++) {
       const year = YEARS[i];
 
-      const percentage = Math.round(i / YEARS.length * 100);
-
-      progress(
-        percentage,
-        'Processing LULC ' + year + '...'
+      setProgress(
+        (i / YEARS.length) * 85,
+        `Preparing ${year}...`
       );
-
-      status('Downloading and analysing ' + year + ' GeoTIFF...');
 
       const raster = await loadRaster(year);
 
-      const stats = await calculateRasterStats(raster,year);
+      const stats = await calculateRasterStats(raster, year);
 
       annualStats[year] = stats;
 
-      // Release the raster after extracting statistics.
-      // The selected map year is loaded again below.
-      if (year === selectedYear) {
-        activeRaster = null;
-      }
-
-      progress(
-        Math.round((i+1) / YEARS.length * 85),
-        'Completed statistics for ' + year
+      setProgress(
+        ((i + 1) / YEARS.length) * 85,
+        `Completed ${year} • ${stats.validPixels.toLocaleString()} selected pixels`
       );
 
-      await new Promise(resolve=>setTimeout(resolve,20));
+      // Let the browser update the progress display.
+      await nextFrame();
     }
 
-    progress(88,'Loading selected map year...');
+    selectedStats = annualStats[selectedYear];
+
+    // Load only the selected year for map display.
+    setProgress(90, `Loading ${selectedYear} map...`);
 
     activeRaster = await loadRaster(selectedYear);
-
     displayRaster(activeRaster);
-
-    selectedStats = annualStats[selectedYear];
 
     updateClassTable(selectedStats);
     drawClassChart(selectedStats);
     drawTrendChart();
     drawChangeChart();
 
-    const areaMessage = selectedStats.areaFactor === null
-      ? 'Pixel counts and percentages are available; projected area could not be verified.'
-      : 'Area calculations completed using the raster pixel dimensions.';
+    const areaText = selectedStats.areaAvailable
+      ? "Area calculations completed using raster pixel dimensions."
+      : "Pixel counts and percentages are available, but this raster CRS does not support the dashboard's hectare calculation.";
 
-    progress(100,'Analysis completed.');
+    setProgress(100, "Selected-area analysis completed.");
 
-    status(
-      'LULC ' + selectedYear +
-      ' displayed • ' +
-      selectedStats.validPixels.toLocaleString() +
-      ' valid classified pixels.'
+    setStatus(
+      `${getSelectedAreaName()} • ${selectedYear} • ` +
+      `${selectedStats.validPixels.toLocaleString()} valid pixels`
     );
 
-    message(
-      'Annual classification statistics completed. ' + areaMessage
+    setMessage(
+      `Analysis completed for ${getSelectedAreaName()}. ${areaText}`
     );
 
-  } catch(error) {
-
+  } catch (error) {
     console.error(error);
 
-    status('Analysis failed.');
+    setStatus("Analysis failed.");
+    setProgress(0, "Analysis failed.");
 
-    message(
-      'Error: ' + error.message +
-      '. Check that the GeoTIFF files are accessible in GitHub.'
+    setMessage(
+      `Error: ${error.message}`
     );
 
-    progress(0,'Analysis failed.');
-
   } finally {
-
     analysisRunning = false;
-    el('runAnalysis').disabled = false;
-
+    el("runAnalysis").disabled = false;
   }
 }
 
-el('runAnalysis').onclick = runAnalysis;
+el("runAnalysis").addEventListener("click", runAnalysis);
 
 
 // ============================================================
-// 19. CHANGE YEAR / CLASS SCHEME
+// 24. YEAR SELECTION
 // ============================================================
 
-el('yearSelect').onchange = async function() {
-
+el("yearSelect").addEventListener("change", async function() {
   const year = Number(this.value);
 
   if (annualStats[year]) {
-
     selectedStats = annualStats[year];
 
     updateClassTable(selectedStats);
@@ -1457,60 +1942,74 @@ el('yearSelect').onchange = async function() {
     drawChangeChart();
 
     try {
-      status('Loading LULC ' + year + ' map...');
+      setStatus(`Loading ${year} map...`);
+
       activeRaster = await loadRaster(year);
       displayRaster(activeRaster);
-      status('LULC ' + year + ' displayed.');
-    } catch(error) {
-      message(error.message);
+
+      setStatus(`${year} map displayed for ${getSelectedAreaName()}.`);
+
+    } catch (error) {
+      setMessage(error.message);
     }
 
   } else {
-    message('Click RUN ANALYSIS to process this year.');
+    setMessage(
+      `Run analysis to calculate ${year} statistics for the selected area.`
+    );
   }
-};
+});
 
-el('compareYear').onchange = drawChangeChart;
+el("compareYear").addEventListener("change", drawChangeChart);
 
 
 // ============================================================
-// 20. MAP LAYER CONTROLS
+// 25. MAP LAYER CONTROLS
 // ============================================================
 
-el('showBoundary').onchange = function() {
+el("showBoundary").addEventListener("change", function() {
   if (!boundaryLayer) return;
 
-  if (this.checked) boundaryLayer.addTo(map);
-  else map.removeLayer(boundaryLayer);
-};
+  if (this.checked) {
+    boundaryLayer.addTo(map);
+  } else {
+    map.removeLayer(boundaryLayer);
+  }
+});
 
-el('showEA').onchange = function() {
+el("showEA").addEventListener("change", function() {
   if (!eaLayer) return;
 
-  if (this.checked) eaLayer.addTo(map);
-  else map.removeLayer(eaLayer);
-};
+  if (this.checked) {
+    eaLayer.addTo(map);
+  } else {
+    map.removeLayer(eaLayer);
+  }
+});
 
-el('showRaster').onchange = function() {
+el("showRaster").addEventListener("change", function() {
   if (!rasterLayer) return;
 
-  if (this.checked) rasterLayer.addTo(map);
-  else map.removeLayer(rasterLayer);
-};
+  if (this.checked) {
+    rasterLayer.addTo(map);
+  } else {
+    map.removeLayer(rasterLayer);
+  }
+});
 
 
 // ============================================================
-// 21. EXPORT SELECTED YEAR STATISTICS
+// 26. EXPORT SELECTED-AREA CLASS STATISTICS
 // ============================================================
 
-el('exportClassCSV').onclick = function() {
-
+el("exportClassCSV").addEventListener("click", function() {
   if (!selectedStats) {
-    alert('Run the analysis first.');
+    alert("Run the analysis first.");
     return;
   }
 
-  const rows = selectedStats.classes.map(c=>({
+  const rows = selectedStats.classes.map(c => ({
+    analysis_area:selectedStats.analysisArea,
     year:selectedStats.year,
     class_id:c.id,
     class_name:c.name,
@@ -1519,29 +2018,30 @@ el('exportClassCSV').onclick = function() {
     percentage:c.percent
   }));
 
-  download(
-    Papa.parse ? Papa.unparse(rows) : rows.map(r=>Object.values(r).join(',')).join('\n'),
-    'Gambia_LULC_Statistics_' + selectedStats.year + '.csv',
-    'text/csv'
+  downloadFile(
+    Papa.unparse(rows),
+    `Gambia_LULC_${selectedStats.year}_Selected_Area.csv`,
+    "text/csv;charset=utf-8"
   );
-};
+});
 
 
 // ============================================================
-// 22. EXPORT ANNUAL COMPARISON CSV
+// 27. EXPORT ANNUAL SELECTED-AREA COMPARISON
 // ============================================================
 
-el('exportAnnualCSV').onclick = function() {
-
+el("exportAnnualCSV").addEventListener("click", function() {
   const rows = [];
 
-  YEARS.forEach(year=>{
+  YEARS.forEach(year => {
     const stats = annualStats[year];
+
     if (!stats) return;
 
-    stats.classes.forEach(c=>{
+    stats.classes.forEach(c => {
       rows.push({
-        year,
+        analysis_area:stats.analysisArea,
+        year:year,
         class_id:c.id,
         class_name:c.name,
         pixel_count:c.pixels,
@@ -1552,118 +2052,126 @@ el('exportAnnualCSV').onclick = function() {
   });
 
   if (!rows.length) {
-    alert('Run analysis first.');
+    alert("Run analysis first.");
     return;
   }
 
-  download(
+  downloadFile(
     Papa.unparse(rows),
-    'Gambia_LULC_Annual_Comparison_2000_2025.csv',
-    'text/csv'
+    "Gambia_LULC_Annual_Selected_Area_2000_2025.csv",
+    "text/csv;charset=utf-8"
   );
-};
+});
 
 
 // ============================================================
-// 23. EXPORT SELECTED ADMINISTRATIVE AOI
+// 28. EXPORT SELECTED ADMINISTRATIVE GEOJSON
 // ============================================================
 
-el('exportSelected').onclick = function() {
-
+el("exportSelected").addEventListener("click", function() {
   if (!selectedFeatures || !selectedFeatures.features.length) {
-    alert('Select an administrative area first.');
+    alert("Select an administrative area first.");
     return;
   }
 
-  download(
-    JSON.stringify(selectedFeatures,null,2),
-    'Gambia_Selected_AOI.geojson',
-    'application/geo+json'
+  const output = {
+    type:"FeatureCollection",
+    name:getSelectedAreaName(),
+    features:selectedFeatures.features
+  };
+
+  downloadFile(
+    JSON.stringify(output, null, 2),
+    "Gambia_Selected_Administrative_Area.geojson",
+    "application/geo+json"
   );
-};
+});
 
 
 // ============================================================
-// 24. RESET
+// 29. RESET DASHBOARD
 // ============================================================
 
-el('resetDashboard').onclick = function() {
+el("resetDashboard").addEventListener("click", function() {
+  if (analysisRunning) return;
 
-  el('regionSelect').value = '';
-  el('districtSelect').value = '';
-  el('wardSelect').value = '';
+  el("regionSelect").value = "";
+  updateDistrictOptions();
 
-  updateDistricts();
+  el("districtSelect").value = "";
+  updateWardOptions();
 
-  selectedFeatures = null;
+  el("wardSelect").value = "";
+
+  applyArea();
+
   annualStats = {};
   selectedStats = null;
-
-  if (rasterLayer) map.removeLayer(rasterLayer);
-
-  rasterLayer = null;
   activeRaster = null;
 
-  el('classTable').innerHTML =
-    '<tr><td colspan="3">Run analysis to populate statistics.</td></tr>';
+  if (rasterLayer && map.hasLayer(rasterLayer)) {
+    map.removeLayer(rasterLayer);
+  }
 
-  ['cropArea','vegetationArea','builtArea','waterArea'].forEach(id=>{
-    el(id).textContent = '—';
-  });
+  rasterLayer = null;
 
-  el('progressBar').style.width = '0%';
-  el('progressText').textContent = 'Ready.';
+  clearAnalysisDisplay();
 
-  updateAdministrativeStats();
+  setProgress(0, "Ready.");
+  setStatus("Dashboard reset.");
 
-  message('Dashboard reset. Repository data remain connected.');
+  setMessage(
+    "Dashboard reset. Repository connection remains active."
+  );
 
-  map.setView([13.45,-15.4],8);
-};
+  map.setView([13.45, -15.4], 8);
+});
 
 
 // ============================================================
-// 25. STARTUP
+// 30. STARTUP
 // ============================================================
 
 async function initialise() {
-
   try {
-
-    progress(5,'Connecting to GitHub...');
+    setProgress(5, "Connecting to GitHub...");
 
     await loadBoundaries();
 
-    progress(10,'Boundary loaded. Ready for LULC analysis.');
+    applyArea();
 
-    status('GitHub connected. Choose a year and run analysis.');
+    setProgress(10, "Administrative boundaries loaded.");
 
-    message(
-      'Repository connected successfully. Click RUN ANALYSIS to calculate LULC statistics for all six available years.'
+    setStatus(
+      "GitHub connected. Select an area and run LULC analysis."
     );
 
-  } catch(error) {
+    setMessage(
+      "Select a region, district or ward, then click RUN ANALYSIS. The raster statistics will be calculated only within the selected administrative geometry."
+    );
 
+  } catch (error) {
     console.error(error);
 
-    el('connectionStatus').textContent =
-      'Connection error: ' + error.message;
+    el("connectionStatus").textContent =
+      `Connection error: ${error.message}`;
 
-    status('Could not load repository data.');
+    setStatus("Could not load repository data.");
 
-    message(
-      'Check the repository URL, branch and file names. ' +
-      error.message
+    setMessage(
+      `Check the repository, branch and file names. ${error.message}`
     );
   }
 }
 
 initialise();
 
-console.log('GBoS GEOAI — Gambia Agricultural Intelligence');
-console.log('Repository:',RAW);
-console.log('Available LULC years:',YEARS);
+console.log("GBoS GEOAI — Gambia Agricultural Intelligence");
+console.log("Repository:", RAW);
+console.log("Class mapping:", CLASSES);
+console.log("Available years:", YEARS);
 
 </script>
 </body>
 </html>
+
