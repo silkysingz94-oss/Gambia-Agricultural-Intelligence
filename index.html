@@ -8,6 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
 <style>
@@ -20,65 +21,181 @@
   --bg:#f1f5f2;
   --white:#ffffff;
 }
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--dark);background:var(--bg)}
-header{height:66px;background:#123d2b;color:white;display:flex;justify-content:space-between;align-items:center;padding:0 20px}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:39px;height:39px;border-radius:10px;display:grid;place-items:center;background:#239565;font-weight:800;font-size:20px}
-.brand h1{font-size:15px;margin:0;font-weight:800}
-.brand small{font-size:9px;color:#c5ded0;display:block;margin-top:3px}
-.header-right{font-size:10px;color:#d4e7dc;text-align:right;line-height:1.7}
-main{height:calc(100vh - 66px);display:grid;grid-template-columns:minmax(255px,1fr) minmax(360px,1fr) minmax(280px,1fr);gap:10px;padding:10px}
-.panel{background:var(--white);border:1px solid var(--border);border-radius:11px;padding:13px;min-width:0;overflow:auto}
-.map-panel{padding:0;overflow:hidden;display:flex;flex-direction:column}
-.section{font-size:11px;font-weight:800;color:var(--green);letter-spacing:.5px;text-transform:uppercase;margin:15px 0 9px}
-.section:first-child{margin-top:2px}
-.sub{font-size:10px;color:var(--muted);line-height:1.55}
-label{display:block;font-size:10px;font-weight:650;margin:9px 0 5px;color:#53665b}
-select,input{width:100%;border:1px solid var(--border);border-radius:7px;padding:9px;background:white;font-family:inherit;font-size:10px;color:var(--dark)}
-button{border:0;border-radius:7px;padding:10px 11px;font-family:inherit;font-size:10px;font-weight:750;cursor:pointer}
-.primary{background:var(--green);color:white}
-.secondary{background:#e9f2ed;color:var(--green)}
-.dark{background:#203c30;color:white}
-.danger{background:#fcebea;color:#a33b35}
-button:disabled{opacity:.5;cursor:not-allowed}
-.btnrow{display:flex;gap:7px;margin-top:9px}
-.btnrow button{flex:1}
-.upload{background:#f8fbf9;border:1px dashed #a9c6b5;padding:10px;border-radius:8px}
-.kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.kpi{background:#f4f8f5;border:1px solid #e4eee7;border-radius:8px;padding:10px}
-.kpi small{font-size:9px;color:var(--muted)}
-.kpi strong{display:block;color:var(--green);font-size:19px;margin-top:5px;overflow-wrap:anywhere}
-.kpi span{font-size:9px;color:var(--muted)}
-hr{border:0;border-top:1px solid var(--border);margin:13px 0}
-.map-toolbar{padding:11px;border-bottom:1px solid var(--border);background:white}
-.map-toolbar strong{font-size:12px}
-.map-toolbar small{font-size:9px;color:var(--muted)}
-.map-row{display:flex;justify-content:space-between;gap:8px;align-items:center}
-#map{flex:1;min-height:300px;width:100%;background:#e8eee9}
-#status,#message{font-size:10px;color:var(--green);line-height:1.5;margin-top:6px}
-.chartbox{height:210px;margin:9px 0 15px}
-.legend{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.legend-item{font-size:9px;display:flex;align-items:center;gap:7px}
-.swatch{width:12px;height:12px;border-radius:3px;flex:none}
-table{width:100%;border-collapse:collapse;font-size:9px}
-td,th{padding:7px 5px;border-bottom:1px solid var(--border);text-align:left}
-th{color:var(--muted);font-weight:600}
-td:last-child,th:last-child{text-align:right}
-.note{background:#fff8e8;border:1px solid #f0e4c5;color:#705a27;padding:10px;border-radius:8px;font-size:9px;line-height:1.6}
-footer{font-size:9px;color:var(--muted);line-height:1.7;margin-top:15px}
-.progress{width:100%;height:7px;background:#e6eee8;border-radius:10px;overflow:hidden;margin-top:8px}
-#progressBar{height:100%;width:0%;background:var(--green2);transition:width .2s}
-.statusline{font-size:9px;color:var(--muted);margin-top:5px}
-.selection-box{background:#edf6f0;border:1px solid #d5e8db;padding:9px;border-radius:8px;font-size:10px;line-height:1.6;margin-top:9px}
-.selection-box strong{color:var(--green)}
-.control-check{display:flex;align-items:center;gap:7px}
-.control-check input{width:auto;margin:0}
-@media(max-width:1000px){
-  main{height:auto;grid-template-columns:1fr}
-  .panel{max-height:none}
-  .map-panel{height:560px}
-  #map{min-height:450px}
+* {box-sizing:border-box}
+body {
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  color:var(--dark);
+  background:var(--bg);
+}
+header {
+  height:66px;
+  background:#123d2b;
+  color:white;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
+}
+.brand {display:flex;align-items:center;gap:12px}
+.logo {
+  width:39px;height:39px;border-radius:10px;
+  display:grid;place-items:center;
+  background:#239565;font-weight:800;font-size:20px;
+}
+.brand h1 {font-size:15px;margin:0;font-weight:800}
+.brand small {font-size:9px;color:#c5ded0;display:block;margin-top:3px}
+.header-right {font-size:10px;color:#d4e7dc;text-align:right;line-height:1.7}
+main {
+  height:calc(100vh - 66px);
+  display:grid;
+  grid-template-columns:minmax(255px,1fr) minmax(360px,1fr) minmax(280px,1fr);
+  gap:10px;
+  padding:10px;
+}
+.panel {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:13px;
+  min-width:0;
+  overflow:auto;
+}
+.map-panel {
+  padding:0;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.section {
+  font-size:11px;
+  font-weight:800;
+  color:var(--green);
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  margin:15px 0 9px;
+}
+.section:first-child {margin-top:2px}
+.sub {
+  font-size:10px;
+  color:var(--muted);
+  line-height:1.55;
+}
+label {
+  display:block;
+  font-size:10px;
+  font-weight:650;
+  margin:9px 0 5px;
+  color:#53665b;
+}
+select,input {
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:7px;
+  padding:9px;
+  background:white;
+  font-family:inherit;
+  font-size:10px;
+  color:var(--dark);
+}
+button {
+  border:0;
+  border-radius:7px;
+  padding:10px 11px;
+  font-family:inherit;
+  font-size:10px;
+  font-weight:750;
+  cursor:pointer;
+}
+.primary {background:var(--green);color:white}
+.secondary {background:#e9f2ed;color:var(--green)}
+.dark {background:#203c30;color:white}
+.danger {background:#fcebea;color:#a33b35}
+button:disabled {opacity:.5;cursor:not-allowed}
+.btnrow {display:flex;gap:7px;margin-top:9px}
+.btnrow button {flex:1}
+.upload {
+  background:#f8fbf9;
+  border:1px dashed #a9c6b5;
+  padding:10px;
+  border-radius:8px;
+}
+.kpis {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.kpi {
+  background:#f4f8f5;
+  border:1px solid #e4eee7;
+  border-radius:8px;
+  padding:10px;
+}
+.kpi small {font-size:9px;color:var(--muted)}
+.kpi strong {
+  display:block;
+  color:var(--green);
+  font-size:19px;
+  margin-top:5px;
+  overflow-wrap:anywhere;
+}
+.kpi span {font-size:9px;color:var(--muted)}
+hr {border:0;border-top:1px solid var(--border);margin:13px 0}
+.map-toolbar {
+  padding:11px;
+  border-bottom:1px solid var(--border);
+  background:white;
+}
+.map-toolbar strong {font-size:12px}
+.map-toolbar small {font-size:9px;color:var(--muted)}
+.map-row {display:flex;justify-content:space-between;gap:8px;align-items:center}
+#map {flex:1;min-height:300px;width:100%}
+#status,#message {
+  font-size:10px;
+  color:var(--green);
+  line-height:1.5;
+  margin-top:6px;
+}
+.chartbox {height:210px;margin:9px 0 15px}
+.legend {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.legend-item {font-size:9px;display:flex;align-items:center;gap:7px}
+.swatch {width:12px;height:12px;border-radius:3px;flex:none}
+table {width:100%;border-collapse:collapse;font-size:9px}
+td,th {padding:7px 5px;border-bottom:1px solid var(--border);text-align:left}
+th {color:var(--muted);font-weight:600}
+td:last-child,th:last-child {text-align:right}
+.note {
+  background:#fff8e8;
+  border:1px solid #f0e4c5;
+  color:#705a27;
+  padding:10px;
+  border-radius:8px;
+  font-size:9px;
+  line-height:1.6;
+}
+footer {
+  font-size:9px;color:var(--muted);
+  line-height:1.7;margin-top:15px;
+}
+.progress {
+  width:100%;height:7px;background:#e6eee8;
+  border-radius:10px;overflow:hidden;margin-top:8px;
+}
+#progressBar {
+  height:100%;width:0%;
+  background:var(--green2);
+  transition:width .2s;
+}
+.statusline {font-size:9px;color:var(--muted);margin-top:5px}
+@media(max-width:1000px) {
+  main {height:auto;grid-template-columns:1fr}
+  .panel {max-height:none}
+  .map-panel {height:560px}
+  #map {min-height:450px}
 }
 </style>
 </head>
@@ -101,7 +218,10 @@ footer{font-size:9px;color:var(--muted);line-height:1.7;margin-top:15px}
 
 <main>
 
-<!-- LEFT: CONTROLS -->
+<!-- =====================================================
+     LEFT: CONTROLS
+====================================================== -->
+
 <section class="panel">
 
   <div class="section">01. Data connection</div>
@@ -109,7 +229,9 @@ footer{font-size:9px;color:var(--muted);line-height:1.7;margin-top:15px}
   <div class="upload">
     <div class="sub">Data repository</div>
     <strong style="font-size:10px">silkysingz94-oss / Gambia-Agricultural-Intelligence</strong>
-    <div class="sub" style="margin-top:5px">Data are fetched from the public GitHub repository.</div>
+    <div class="sub" style="margin-top:5px">
+      Data are fetched from the public GitHub repository.
+    </div>
     <div id="connectionStatus" class="statusline">Waiting for connection...</div>
   </div>
 
@@ -117,32 +239,22 @@ footer{font-size:9px;color:var(--muted);line-height:1.7;margin-top:15px}
 
   <label>Region</label>
   <select id="regionSelect">
-    <option value="">Select a region</option>
+    <option value="">All regions</option>
   </select>
 
   <label>District</label>
-  <select id="districtSelect" disabled>
-    <option value="">Select a district</option>
+  <select id="districtSelect">
+    <option value="">All districts</option>
   </select>
 
   <label>Ward</label>
-  <select id="wardSelect" disabled>
-    <option value="">Select a ward</option>
+  <select id="wardSelect">
+    <option value="">All wards</option>
   </select>
 
-  <div class="sub" style="margin-top:6px">
-    Select a region, district or ward. Lower-level selections are optional.
-    The analysis will use only the selected administrative area.
-  </div>
-
   <div class="btnrow">
-    <button class="primary" id="applyArea" disabled>APPLY AOI</button>
-    <button class="secondary" id="resetArea">CLEAR AOI</button>
-  </div>
-
-  <div id="selectionSummary" class="selection-box">
-    <strong>No AOI selected.</strong><br>
-    Select an administrative area to begin.
+    <button class="primary" id="applyArea">Apply AOI</button>
+    <button class="secondary" id="resetArea">Reset</button>
   </div>
 
   <div class="section">03. LULC classification</div>
@@ -174,27 +286,34 @@ footer{font-size:9px;color:var(--muted);line-height:1.7;margin-top:15px}
   </select>
 
   <div class="sub" style="margin-top:5px">
-    Choose the scheme that matches the actual numeric values in the GeoTIFF.
+    Choose the class-code scheme matching the values stored in your GeoTIFFs.
   </div>
 
   <div class="btnrow">
-    <button class="primary" id="runAnalysis" disabled>RUN ANALYSIS</button>
+    <button class="primary" id="runAnalysis">RUN ANALYSIS</button>
     <button class="secondary" id="resetDashboard">RESET</button>
   </div>
 
-  <div class="progress"><div id="progressBar"></div></div>
-  <div id="progressText" class="statusline">Waiting for AOI selection.</div>
+  <div class="progress">
+    <div id="progressBar"></div>
+  </div>
+  <div id="progressText" class="statusline">Ready.</div>
 
   <div class="section">04. Map layers</div>
 
   <label class="control-check">
-    <input type="checkbox" id="showBoundary" checked>
-    Selected administrative boundary
+    <input type="checkbox" id="showBoundary" checked style="width:auto">
+    Administrative boundaries
   </label>
 
   <label class="control-check">
-    <input type="checkbox" id="showRaster" checked>
-    Clipped LULC classification
+    <input type="checkbox" id="showRaster" checked style="width:auto">
+    LULC classification
+  </label>
+
+  <label class="control-check">
+    <input type="checkbox" id="showEA" style="width:auto">
+    Enumeration area boundaries
   </label>
 
   <label>Basemap</label>
@@ -207,7 +326,7 @@ footer{font-size:9px;color:var(--muted);line-height:1.7;margin-top:15px}
   <div class="section">05. Exports</div>
 
   <button class="primary" id="exportClassCSV" style="width:100%;margin-bottom:7px">
-    Export selected AOI LULC CSV
+    Export LULC statistics CSV
   </button>
 
   <button class="secondary" id="exportSelected" style="width:100%;margin-bottom:7px">
@@ -215,39 +334,49 @@ footer{font-size:9px;color:var(--muted);line-height:1.7;margin-top:15px}
   </button>
 
   <button class="secondary" id="exportAnnualCSV" style="width:100%">
-    Export selected AOI annual CSV
+    Export annual comparison CSV
   </button>
 
   <div id="message"></div>
+
 </section>
 
 
-<!-- CENTRE: MAP -->
+<!-- =====================================================
+     CENTRE: MAP
+====================================================== -->
+
 <section class="panel map-panel">
+
   <div class="map-toolbar">
     <div class="map-row">
       <div>
-        <strong>02. Selected-area LULC map</strong><br>
-        <small>Only the selected administrative area is displayed</small>
+        <strong>02. Interactive LULC map</strong><br>
+        <small>Gambia • Annual land-cover mapping</small>
       </div>
-      <button class="secondary" id="zoomAOI" disabled>Zoom to AOI</button>
+      <button class="secondary" id="zoomGambia">Zoom to Gambia</button>
     </div>
     <div id="status">Connecting to GitHub...</div>
   </div>
+
   <div id="map"></div>
+
 </section>
 
 
-<!-- RIGHT: ANALYTICS -->
+<!-- =====================================================
+     RIGHT: ANALYTICS
+====================================================== -->
+
 <section class="panel">
 
   <div class="section">03. Agricultural intelligence</div>
 
   <div class="kpis">
     <div class="kpi">
-      <small>Selected EA features</small>
+      <small>Enumeration areas</small>
       <strong id="eaCount">0</strong>
-      <span>Within selected AOI</span>
+      <span>Selected boundary features</span>
     </div>
     <div class="kpi">
       <small>Selected population</small>
@@ -260,9 +389,9 @@ footer{font-size:9px;color:var(--muted);line-height:1.7;margin-top:15px}
       <span>Sum of EA household field</span>
     </div>
     <div class="kpi">
-      <small>Raster resolution</small>
+      <small>Raster pixel size</small>
       <strong id="pixelSize">—</strong>
-      <span>Source raster resolution</span>
+      <span>GeoTIFF resolution</span>
     </div>
   </div>
 
@@ -292,33 +421,45 @@ footer{font-size:9px;color:var(--muted);line-height:1.7;margin-top:15px}
   </div>
 
   <div class="section">05. Land-cover composition</div>
-  <div class="chartbox"><canvas id="classChart"></canvas></div>
+  <div class="chartbox">
+    <canvas id="classChart"></canvas>
+  </div>
 
   <div class="section">06. Annual LULC trends</div>
-  <div class="chartbox"><canvas id="trendChart"></canvas></div>
+  <div class="chartbox">
+    <canvas id="trendChart"></canvas>
+  </div>
 
-  <div class="section">07. Selected-year statistics</div>
+  <div class="section">07. Selected year statistics</div>
+
   <table>
     <thead>
-      <tr><th>Land-cover class</th><th>Area (ha)</th><th>Share</th></tr>
+      <tr>
+        <th>Land-cover class</th>
+        <th>Area (ha)</th>
+        <th>Share</th>
+      </tr>
     </thead>
     <tbody id="classTable">
-      <tr><td colspan="3">Apply an AOI and run analysis.</td></tr>
+      <tr><td colspan="3">Run analysis to populate statistics.</td></tr>
     </tbody>
   </table>
 
   <div class="section">08. Classification legend</div>
+
   <div id="legend" class="legend"></div>
 
   <div class="section">09. Change analysis</div>
-  <div class="chartbox"><canvas id="changeChart"></canvas></div>
+  <div class="chartbox">
+    <canvas id="changeChart"></canvas>
+  </div>
 
   <div class="note">
-    All LULC statistics are calculated only from raster pixels whose centres fall inside the selected administrative geometry. Raster pixels outside the selected AOI are excluded from the calculations and rendered transparently on the map.
+    Statistics are calculated from the classified raster pixels. Area calculations require a projected raster with metre-based pixel dimensions, such as EPSG:32628. Selected administrative population and household statistics are calculated from the uploaded EA attributes.
   </div>
 
   <div class="note" style="margin-top:8px">
-    The available years are 2000, 2005, 2010, 2015, 2020 and 2025. These are comparisons of available snapshots, not annual observations for every intervening year.
+    The current repository contains six classified years: 2000, 2005, 2010, 2015, 2020 and 2025. Annual trends between these dates are comparisons of available snapshots, not observations for every intervening year.
   </div>
 
   <footer>
@@ -327,20 +468,25 @@ footer{font-size:9px;color:var(--muted);line-height:1.7;margin-top:15px}
     Gambia Bureau of Statistics<br>
     GBoS GEOAI • Research and educational use
   </footer>
+
 </section>
 
 </main>
 
-<!-- LIBRARIES -->
+
+<!-- =====================================================
+     LIBRARIES
+====================================================== -->
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/georaster"></script>
-<script src="https://unpkg.com/proj4@2.12.1/dist/proj4.js"></script>
+<script src="https://unpkg.com/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.2.0/turf.min.js"></script>
 
+
 <script>
-'use strict';
 
 // ============================================================
 // 1. REPOSITORY CONFIGURATION
@@ -352,7 +498,7 @@ const BRANCH = 'main';
 
 const RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}`;
 
-const YEARS = [2000, 2005, 2010, 2015, 2020, 2025];
+const YEARS = [2000,2005,2010,2015,2020,2025];
 
 const FILES = {
   boundary: `${RAW}/Census_EAs_Geo.json`,
@@ -365,6 +511,7 @@ const FILES = {
 // ============================================================
 
 const SCHEMES = {
+
   agri: [
     {id:0,name:'Water',color:'#2878b5'},
     {id:1,name:'Cropland',color:'#e6b94c'},
@@ -382,6 +529,7 @@ const SCHEMES = {
     {id:4,name:'Bare land',color:'#c9a27b'},
     {id:5,name:'Wetlands',color:'#59aeb1'}
   ]
+
 };
 
 
@@ -393,13 +541,11 @@ let map;
 let baseLayers = {};
 let boundaryData = null;
 let boundaryLayer = null;
+let eaLayer = null;
 let rasterLayer = null;
-
 let activeRaster = null;
-let selectedFeatures = null;
-let selectedStats = null;
 let annualStats = {};
-
+let selectedStats = null;
 let classChart = null;
 let trendChart = null;
 let changeChart = null;
@@ -410,195 +556,12 @@ let wardField = null;
 let populationField = null;
 let householdField = null;
 
+let selectedFeatures = null;
 let analysisRunning = false;
-let runToken = 0;
-let appliedSelectionKey = '';
-let rasterCache = {};
 
 
 // ============================================================
-// 4. GENERAL HELPERS
-// ============================================================
-
-function el(id) {
-  return document.getElementById(id);
-}
-
-function message(text) {
-  el('message').textContent = text;
-}
-
-function status(text) {
-  el('status').textContent = text;
-}
-
-function progress(value, text) {
-  el('progressBar').style.width = Math.max(0,Math.min(100,value)) + '%';
-  el('progressText').textContent = text;
-}
-
-function number(value, digits=1) {
-  if (!Number.isFinite(value)) return '—';
-  return value.toLocaleString(undefined,{
-    maximumFractionDigits:digits
-  });
-}
-
-function getScheme() {
-  return SCHEMES[el('classScheme').value];
-}
-
-function formatArea(value) {
-  return number(value,1);
-}
-
-function download(content, filename, type) {
-  const blob = new Blob([content],{type});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),1500);
-}
-
-async function fetchWithError(url) {
-  const response = await fetch(url,{cache:'no-cache'});
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}: ${url}`);
-  }
-  return response;
-}
-
-function yieldBrowser() {
-  return new Promise(resolve=>setTimeout(resolve,0));
-}
-
-function setRunEnabled(enabled) {
-  el('runAnalysis').disabled = !enabled || analysisRunning;
-}
-
-function clearCharts() {
-  if (classChart) classChart.destroy();
-  if (trendChart) trendChart.destroy();
-  if (changeChart) changeChart.destroy();
-
-  classChart = null;
-  trendChart = null;
-  changeChart = null;
-}
-
-function clearAnalysisResults() {
-  annualStats = {};
-  selectedStats = null;
-  activeRaster = null;
-  rasterCache = {};
-
-  clearCharts();
-
-  el('classTable').innerHTML =
-    '<tr><td colspan="3">Run analysis to populate statistics.</td></tr>';
-
-  ['cropArea','vegetationArea','builtArea','waterArea','pixelSize']
-    .forEach(id=>el(id).textContent='—');
-
-  progress(0,'Ready for analysis.');
-}
-
-function cancelAnalysis(reason) {
-  runToken++;
-  analysisRunning = false;
-
-  el('runAnalysis').disabled = !selectedFeatures || !selectedFeatures.features.length;
-
-  if (reason) {
-    status(reason);
-    progress(0,reason);
-  }
-}
-
-function findField(properties,candidates) {
-  const keys = Object.keys(properties || {});
-  for (const candidate of candidates) {
-    const found = keys.find(
-      key=>key.toLowerCase()===candidate.toLowerCase()
-    );
-    if (found) return found;
-  }
-  return null;
-}
-
-function parseEPSG(projection) {
-  if (projection === null || projection === undefined) return null;
-
-  const match = String(projection).match(/(\d{4,6})/);
-  return match ? Number(match[1]) : null;
-}
-
-function rasterCRS(raster) {
-  const epsg = parseEPSG(raster.projection);
-  if (!epsg) {
-    throw new Error(
-      'The GeoTIFF projection could not be identified. Ensure the raster has valid EPSG projection metadata.'
-    );
-  }
-  return `EPSG:${epsg}`;
-}
-
-function transformPoint(point, fromCRS, toCRS) {
-  if (fromCRS === toCRS) return point;
-  return proj4(fromCRS,toCRS,point);
-}
-
-function featureCollectionBounds(fc) {
-  const b = turf.bbox(fc);
-  if (!b || b.length !== 4 || !b.every(Number.isFinite)) {
-    throw new Error('The selected AOI has invalid geographic bounds.');
-  }
-  return b;
-}
-
-function featureInside(point, features) {
-  for (const item of features) {
-    const b = item.bbox;
-
-    if (
-      point[0] < b[0] || point[0] > b[2] ||
-      point[1] < b[1] || point[1] > b[3]
-    ) continue;
-
-    try {
-      if (turf.booleanPointInPolygon(
-        turf.point(point),
-        item.feature
-      )) return true;
-    } catch (e) {
-      // Continue to the next selected polygon.
-    }
-  }
-  return false;
-}
-
-function prepareSelectedPolygons(features) {
-  return features.map(feature=>({
-    feature,
-    bbox:turf.bbox(feature)
-  }));
-}
-
-function selectedName() {
-  const region = el('regionSelect').value;
-  const district = el('districtSelect').value;
-  const ward = el('wardSelect').value;
-
-  return [region,district,ward].filter(Boolean).join(' / ');
-}
-
-
-// ============================================================
-// 5. MAP INITIALISATION
+// 4. MAP INITIALISATION
 // ============================================================
 
 map = L.map('map',{
@@ -624,25 +587,93 @@ baseLayers.terrain = L.tileLayer(
 
 baseLayers.satellite.addTo(map);
 
-el('basemapSelect').onchange = function() {
-  Object.values(baseLayers).forEach(layer=>map.removeLayer(layer));
+document.getElementById('basemapSelect').onchange = function() {
+  Object.values(baseLayers).forEach(layer => map.removeLayer(layer));
   baseLayers[this.value].addTo(map);
 };
 
-el('zoomAOI').onclick = function() {
-  if (selectedFeatures && boundaryLayer) {
-    const bounds = boundaryLayer.getBounds();
-    if (bounds.isValid()) map.fitBounds(bounds,{padding:[15,15]});
-  }
+document.getElementById('zoomGambia').onclick = () => {
+  map.setView([13.45,-15.4],8);
 };
 
 
 // ============================================================
-// 6. LOAD ADMINISTRATIVE GEOJSON
+// 5. GENERAL HELPERS
+// ============================================================
+
+function el(id) {
+  return document.getElementById(id);
+}
+
+function message(text) {
+  el('message').textContent = text;
+}
+
+function status(text) {
+  el('status').textContent = text;
+}
+
+function progress(value,text) {
+  el('progressBar').style.width = value + '%';
+  el('progressText').textContent = text;
+}
+
+function number(value,digits=1) {
+  if (!Number.isFinite(value)) return '—';
+  return value.toLocaleString(undefined,{
+    maximumFractionDigits:digits
+  });
+}
+
+function getScheme() {
+  return SCHEMES[el('classScheme').value];
+}
+
+function formatArea(value) {
+  return number(value,1);
+}
+
+function findField(properties,candidates) {
+  const keys = Object.keys(properties || {});
+  for (const candidate of candidates) {
+    const found = keys.find(
+      key => key.toLowerCase() === candidate.toLowerCase()
+    );
+    if (found) return found;
+  }
+  return null;
+}
+
+function download(content,filename,type) {
+  const blob = new Blob([content],{type});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+async function fetchWithError(url) {
+  const response = await fetch(url,{cache:'no-cache'});
+  if (!response.ok) {
+    throw new Error(
+      'HTTP ' + response.status + ' while retrieving ' + url
+    );
+  }
+  return response;
+}
+
+
+// ============================================================
+// 6. LOAD ADMINISTRATIVE GEOJSON FROM GITHUB
 // ============================================================
 
 async function loadBoundaries() {
-  el('connectionStatus').textContent = 'Downloading boundary GeoJSON...';
+
+  el('connectionStatus').textContent =
+    'Downloading Census_EAs_Geo.json...';
+
   status('Loading Gambia administrative boundaries...');
 
   const response = await fetchWithError(FILES.boundary);
@@ -660,45 +691,52 @@ async function loadBoundaries() {
 
   const p = features[0].properties || {};
 
-  regionField = findField(p,[
-    'region','regionname','region_name','lganame','RCO','lga'
-  ]);
-
-  districtField = findField(p,[
-    'distname','district','districtname','district_name'
-  ]);
-
-  wardField = findField(p,[
-    'wardname','ward','ward_name'
-  ]);
-
-  populationField = findField(p,[
-    'sum_pop','population','pop'
-  ]);
-
-  householdField = findField(p,[
-    'sum_hhs','households','hh'
-  ]);
-
-  if (!regionField || !districtField || !wardField) {
-    throw new Error(
-      'Required administrative fields were not found. Check the region, district and ward attributes in Census_EAs_Geo.json.'
-    );
-  }
+  regionField = findField(p,['RCO','region','regionname']);
+  districtField = findField(p,['distname','district','districtname']);
+  wardField = findField(p,['wardname','ward']);
+  populationField = findField(p,['sum_pop','population','pop']);
+  householdField = findField(p,['sum_hhs','households','hh']);
 
   populateRegions();
 
-  // Do not display the complete national boundary layer.
-  // The map remains empty until an AOI is applied.
+  boundaryLayer = L.geoJSON(boundaryData,{
+    style:{
+      color:'#ffffff',
+      weight:0.5,
+      fillOpacity:0
+    },
+    onEachFeature:function(feature,layer) {
+      const props = feature.properties || {};
+
+      const html = [
+        ['Region',regionField],
+        ['District',districtField],
+        ['Ward',wardField],
+        ['Population',populationField],
+        ['Households',householdField]
+      ].filter(item=>item[1]).map(item =>
+        '<b>' + item[0] + ':</b> ' +
+        String(props[item[1]] ?? 'N/A')
+      ).join('<br>');
+
+      layer.bindPopup(html || 'Administrative area');
+    }
+  });
+
+  boundaryLayer.addTo(map);
 
   el('connectionStatus').textContent =
-    `Connected • ${features.length.toLocaleString()} EA features`;
+    'Connected • ' + features.length.toLocaleString() + ' EA features';
 
-  status('Repository connected. Select an administrative AOI.');
+  el('eaCount').textContent = features.length.toLocaleString();
 
-  message(
-    'Boundary data connected. Select a region, district or ward to continue.'
-  );
+  updateAdministrativeStats();
+
+  if (boundaryLayer.getBounds().isValid()) {
+    map.fitBounds(boundaryLayer.getBounds(),{padding:[10,10]});
+  }
+
+  message('Gambia administrative boundary successfully retrieved from GitHub.');
 }
 
 
@@ -708,43 +746,32 @@ async function loadBoundaries() {
 
 function uniqueValues(features,field) {
   if (!field) return [];
-
   return [...new Set(
     features.map(f=>f.properties?.[field])
-      .filter(v=>v!==null && v!==undefined && String(v).trim()!=='')
+      .filter(v=>v!==null && v!==undefined && v!=='')
   )].sort((a,b)=>String(a).localeCompare(String(b)));
 }
 
 function setOptions(select,values,firstLabel) {
   select.innerHTML = '';
   select.add(new Option(firstLabel,''));
-
-  values.forEach(v=>{
-    select.add(new Option(String(v),String(v)));
-  });
+  values.forEach(v=>select.add(new Option(String(v),String(v))));
 }
 
 function populateRegions() {
   setOptions(
     el('regionSelect'),
     uniqueValues(boundaryData.features,regionField),
-    'Select a region'
+    'All regions'
   );
-
-  setOptions(el('districtSelect'),[],'Select a district');
-  setOptions(el('wardSelect'),[],'Select a ward');
-
-  el('districtSelect').disabled = true;
-  el('wardSelect').disabled = true;
-  el('applyArea').disabled = true;
+  updateDistricts();
 }
 
 function updateDistricts() {
+  let features = boundaryData.features;
   const region = el('regionSelect').value;
 
-  let features = boundaryData.features;
-
-  if (region) {
+  if (region && regionField) {
     features = features.filter(
       f=>String(f.properties[regionField])===region
     );
@@ -753,32 +780,25 @@ function updateDistricts() {
   setOptions(
     el('districtSelect'),
     uniqueValues(features,districtField),
-    'All districts in selected region'
+    'All districts'
   );
 
-  el('districtSelect').disabled = !region;
-
-  setOptions(el('wardSelect'),[],'Select a ward');
-  el('wardSelect').disabled = true;
-
-  el('applyArea').disabled = !region;
-
-  invalidateAppliedAOI();
+  updateWards();
 }
 
 function updateWards() {
+  let features = boundaryData.features;
+
   const region = el('regionSelect').value;
   const district = el('districtSelect').value;
 
-  let features = boundaryData.features;
-
-  if (region) {
+  if (region && regionField) {
     features = features.filter(
       f=>String(f.properties[regionField])===region
     );
   }
 
-  if (district) {
+  if (district && districtField) {
     features = features.filter(
       f=>String(f.properties[districtField])===district
     );
@@ -787,85 +807,43 @@ function updateWards() {
   setOptions(
     el('wardSelect'),
     uniqueValues(features,wardField),
-    'All wards in selected district'
+    'All wards'
   );
-
-  el('wardSelect').disabled = !district;
-  el('applyArea').disabled = !region;
-  invalidateAppliedAOI();
 }
 
 el('regionSelect').onchange = updateDistricts;
 el('districtSelect').onchange = updateWards;
 
-el('wardSelect').onchange = invalidateAppliedAOI;
-
 
 // ============================================================
-// 8. CLEAR OLD AOI RESULTS WHEN SELECTION CHANGES
-// ============================================================
-
-function invalidateAppliedAOI() {
-  if (analysisRunning) {
-    cancelAnalysis('Selection changed. Previous analysis cancelled.');
-  }
-
-  selectedFeatures = null;
-  appliedSelectionKey = '';
-
-  if (boundaryLayer) {
-    map.removeLayer(boundaryLayer);
-    boundaryLayer = null;
-  }
-
-  if (rasterLayer) {
-    map.removeLayer(rasterLayer);
-    rasterLayer = null;
-  }
-
-  clearAnalysisResults();
-
-  updateAdministrativeStats();
-
-  el('zoomAOI').disabled = true;
-  el('runAnalysis').disabled = true;
-
-  el('selectionSummary').innerHTML =
-    '<strong>AOI not applied.</strong><br>Click APPLY AOI after selecting an area.';
-
-  status('Apply the new administrative selection before running analysis.');
-}
-
-
-// ============================================================
-// 9. APPLY SELECTED AOI
+// 8. APPLY ADMINISTRATIVE FILTER
 // ============================================================
 
 function applyArea() {
   if (!boundaryData) return;
 
+  let features = boundaryData.features;
+
   const region = el('regionSelect').value;
   const district = el('districtSelect').value;
   const ward = el('wardSelect').value;
 
-  if (!region) {
-    message('Select a region before applying the AOI.');
-    return;
+  if (region && regionField) {
+    features = features.filter(
+      f=>String(f.properties[regionField])===region
+    );
   }
 
-  let features = boundaryData.features.filter(f=>{
-    const p = f.properties || {};
+  if (district && districtField) {
+    features = features.filter(
+      f=>String(f.properties[districtField])===district
+    );
+  }
 
-    if (String(p[regionField]) !== region) return false;
-    if (district && String(p[districtField]) !== district) return false;
-    if (ward && String(p[wardField]) !== ward) return false;
-
-    return true;
-  });
-
-  if (!features.length) {
-    message('No boundary features match the selected administrative area.');
-    return;
+  if (ward && wardField) {
+    features = features.filter(
+      f=>String(f.properties[wardField])===ward
+    );
   }
 
   selectedFeatures = {
@@ -873,113 +851,51 @@ function applyArea() {
     features
   };
 
-  appliedSelectionKey = [region,district,ward].join('|');
+  if (eaLayer) map.removeLayer(eaLayer);
 
-  if (boundaryLayer) map.removeLayer(boundaryLayer);
-
-  boundaryLayer = L.geoJSON(selectedFeatures,{
+  eaLayer = L.geoJSON(selectedFeatures,{
     style:{
       color:'#f4d35e',
-      weight:1.5,
-      fillColor:'#f4d35e',
-      fillOpacity:0.04
-    },
-    onEachFeature:function(feature,layer) {
-      const p = feature.properties || {};
-
-      const popup = [
-        ['Region',p[regionField]],
-        ['District',p[districtField]],
-        ['Ward',p[wardField]]
-      ].filter(x=>x[1]!==undefined)
-       .map(x=>`<b>${x[0]}:</b> ${String(x[1])}`)
-       .join('<br>');
-
-      layer.bindPopup(popup);
+      weight:1,
+      fillOpacity:0.02
     }
   });
 
-  if (el('showBoundary').checked) {
-    boundaryLayer.addTo(map);
+  if (el('showEA').checked) eaLayer.addTo(map);
+
+  if (features.length && eaLayer.getBounds().isValid()) {
+    map.fitBounds(eaLayer.getBounds(),{padding:[15,15]});
   }
-
-  const bounds = boundaryLayer.getBounds();
-
-  if (bounds.isValid()) {
-    map.fitBounds(bounds,{padding:[15,15]});
-  }
-
-  el('zoomAOI').disabled = false;
-  el('runAnalysis').disabled = false;
 
   updateAdministrativeStats();
 
-  const name = selectedName();
-
-  el('selectionSummary').innerHTML =
-    `<strong>Applied AOI:</strong><br>${name}<br>`+
-    `<strong>Selected features:</strong> ${features.length.toLocaleString()}`;
-
-  clearAnalysisResults();
-
   message(
-    `AOI applied: ${name}. Only this selected area will be processed.`
+    features.length.toLocaleString() +
+    ' administrative features selected.'
   );
-
-  status(`Selected AOI: ${name}`);
-
-  progress(0,'Ready to analyse selected AOI.');
 }
 
 el('applyArea').onclick = applyArea;
 
-
-// ============================================================
-// 10. RESET AOI
-// ============================================================
-
 el('resetArea').onclick = function() {
-  if (analysisRunning) cancelAnalysis('AOI cleared.');
-
   el('regionSelect').value = '';
-  setOptions(el('districtSelect'),[],'Select a district');
-  setOptions(el('wardSelect'),[],'Select a ward');
-
-  el('districtSelect').disabled = true;
-  el('wardSelect').disabled = true;
-  el('applyArea').disabled = true;
-
-  selectedFeatures = null;
-  appliedSelectionKey = '';
-
-  if (boundaryLayer) map.removeLayer(boundaryLayer);
-  if (rasterLayer) map.removeLayer(rasterLayer);
-
-  boundaryLayer = null;
-  rasterLayer = null;
-
-  clearAnalysisResults();
-  updateAdministrativeStats();
-
-  el('zoomAOI').disabled = true;
-  el('selectionSummary').innerHTML =
-    '<strong>No AOI selected.</strong><br>Select a region, district or ward.';
-
-  status('Select an administrative area.');
-  message('AOI cleared. No administrative area is currently selected.');
-
+  el('districtSelect').value = '';
+  updateDistricts();
+  applyArea();
   map.setView([13.45,-15.4],8);
 };
 
 
 // ============================================================
-// 11. POPULATION AND HOUSEHOLD STATISTICS
+// 9. POPULATION AND HOUSEHOLD STATISTICS
 // ============================================================
 
 function updateAdministrativeStats() {
+  if (!boundaryData) return;
+
   const features = selectedFeatures
     ? selectedFeatures.features
-    : [];
+    : boundaryData.features;
 
   let population = 0;
   let households = 0;
@@ -1001,11 +917,13 @@ function updateAdministrativeStats() {
 
 
 // ============================================================
-// 12. CLASSIFICATION LEGEND
+// 10. CLASSIFICATION LEGEND
 // ============================================================
 
 function drawLegend() {
-  el('legend').innerHTML = getScheme().map(c=>`
+  const scheme = getScheme();
+
+  el('legend').innerHTML = scheme.map(c=>`
     <div class="legend-item">
       <span class="swatch" style="background:${c.color}"></span>
       ${c.id} — ${c.name}
@@ -1015,86 +933,37 @@ function drawLegend() {
 
 el('classScheme').onchange = function() {
   drawLegend();
-
-  if (analysisRunning) {
-    cancelAnalysis('Classification scheme changed. Run analysis again.');
-  }
-
-  clearAnalysisResults();
-
-  if (selectedFeatures) {
-    message('Classification scheme changed. Run analysis again for the selected AOI.');
-  }
+  message('Class-code interpretation changed. Run analysis again.');
 };
 
 drawLegend();
 
 
 // ============================================================
-// 13. LOAD GEOTIFF
+// 11. FETCH AND PARSE GEOTIFF
 // ============================================================
 
 async function loadRaster(year) {
-  if (rasterCache[year]) return rasterCache[year];
-
-  status(`Downloading LULC ${year} GeoTIFF...`);
+  status('Downloading LULC ' + year + ' from GitHub...');
 
   const response = await fetchWithError(FILES.raster(year));
   const buffer = await response.arrayBuffer();
 
-  status(`Decoding LULC ${year} GeoTIFF...`);
-
-  if (typeof parseGeoraster !== 'function') {
-    throw new Error('GeoTIFF parser did not load. Check the georaster library connection.');
-  }
+  status('Decoding LULC ' + year + ' GeoTIFF...');
 
   const raster = await parseGeoraster(buffer);
 
   if (!raster.values || !raster.values.length) {
-    throw new Error(`No raster band found for year ${year}.`);
+    throw new Error('No raster band found for year ' + year);
   }
 
-  if (
-    !Number.isFinite(Number(raster.xmin)) ||
-    !Number.isFinite(Number(raster.xmax)) ||
-    !Number.isFinite(Number(raster.ymin)) ||
-    !Number.isFinite(Number(raster.ymax)) ||
-    !Number.isFinite(Number(raster.width)) ||
-    !Number.isFinite(Number(raster.height))
-  ) {
-    throw new Error(`Invalid raster dimensions or extent for ${year}.`);
-  }
-
-  if (raster.width <= 0 || raster.height <= 0) {
-    throw new Error(`Invalid raster dimensions for ${year}.`);
-  }
-
-  rasterCRS(raster);
-
-  rasterCache[year] = raster;
   return raster;
 }
 
 
 // ============================================================
-// 14. RASTER ARRAY ACCESS
+// 12. PIXEL-BASED CLASSIFICATION STATISTICS
 // ============================================================
-
-function getRasterValue(raster,row,col) {
-  const band = raster.values[0];
-
-  if (!band) return NaN;
-
-  if (ArrayBuffer.isView(band)) {
-    return Number(band[row * raster.width + col]);
-  }
-
-  if (Array.isArray(band[row])) {
-    return Number(band[row][col]);
-  }
-
-  return Number(band[row * raster.width + col]);
-}
 
 function isNoData(value,raster) {
   if (!Number.isFinite(value)) return true;
@@ -1102,259 +971,123 @@ function isNoData(value,raster) {
   if (
     raster.noDataValue !== null &&
     raster.noDataValue !== undefined &&
-    value === Number(raster.noDataValue)
+    value === raster.noDataValue
   ) return true;
 
   return false;
 }
 
+function getRasterAreaFactor(raster) {
+  const px = Math.abs(Number(raster.pixelWidth));
+  const py = Math.abs(Number(raster.pixelHeight));
 
-// ============================================================
-// 15. RASTER GEOMETRY AND AREA
-// ============================================================
+  const projection = Number(raster.projection);
 
-function rasterGeometry(raster) {
-  const crs = rasterCRS(raster);
-
-  const dx = (raster.xmax-raster.xmin)/raster.width;
-  const dy = (raster.ymax-raster.ymin)/raster.height;
-
-  if (!Number.isFinite(dx) || !Number.isFinite(dy) || dx===0 || dy===0) {
-    throw new Error('Invalid GeoTIFF pixel dimensions.');
-  }
-
-  return {
-    crs,
-    dx,
-    dy,
-    xmin:Number(raster.xmin),
-    xmax:Number(raster.xmax),
-    ymin:Number(raster.ymin),
-    ymax:Number(raster.ymax),
-    width:raster.width,
-    height:raster.height
-  };
-}
-
-function getCellAreaHa(raster,geom,row,col) {
-  const epsg = parseEPSG(raster.projection);
-
-  // UTM projected coordinates in metres.
   if (
-    epsg >= 32601 && epsg <= 32660 ||
-    epsg >= 32701 && epsg <= 32760
+    Number.isFinite(px) &&
+    Number.isFinite(py) &&
+    projection === 32628
   ) {
-    return Math.abs(geom.dx*geom.dy)/10000;
+    return (px * py) / 10000;
   }
 
-  // Geographic coordinates: approximate cell area at its latitude.
-  if (epsg === 4326) {
-    const lat = geom.ymax-(row+0.5)*geom.dy;
-    const earthRadius = 6378137;
-    const latRadians = lat*Math.PI/180;
-
-    const width = Math.abs(geom.dx*Math.PI/180*earthRadius*Math.cos(latRadians));
-    const height = Math.abs(geom.dy*Math.PI/180*earthRadius);
-
-    return (width*height)/10000;
+  if (
+    Number.isFinite(px) &&
+    Number.isFinite(py) &&
+    projection >= 32601 &&
+    projection <= 32660
+  ) {
+    return (px * py) / 10000;
   }
 
-  throw new Error(
-    `Area calculation is not configured for EPSG:${epsg}. Use a metre-based UTM GeoTIFF or EPSG:4326.`
-  );
+  return null;
 }
 
+async function calculateRasterStats(raster,year) {
 
-// ============================================================
-// 16. SELECTED AOI RASTER WINDOW
-// ============================================================
-
-function getRasterWindow(raster,selectedBounds) {
-  const geom = rasterGeometry(raster);
-
-  const rasterCoordinates = [
-    transformPoint([selectedBounds[0],selectedBounds[1]],'EPSG:4326',geom.crs),
-    transformPoint([selectedBounds[0],selectedBounds[3]],'EPSG:4326',geom.crs),
-    transformPoint([selectedBounds[2],selectedBounds[1]],'EPSG:4326',geom.crs),
-    transformPoint([selectedBounds[2],selectedBounds[3]],'EPSG:4326',geom.crs)
-  ];
-
-  const xs = rasterCoordinates.map(p=>p[0]);
-  const ys = rasterCoordinates.map(p=>p[1]);
-
-  const minX = Math.min(...xs);
-  const maxX = Math.max(...xs);
-  const minY = Math.min(...ys);
-  const maxY = Math.max(...ys);
-
-  const left = Math.max(
-    0,
-    Math.floor((minX-geom.xmin)/geom.dx)
-  );
-
-  const right = Math.min(
-    raster.width-1,
-    Math.ceil((maxX-geom.xmin)/geom.dx)-1
-  );
-
-  const top = Math.max(
-    0,
-    Math.floor((geom.ymax-maxY)/geom.dy)
-  );
-
-  const bottom = Math.min(
-    raster.height-1,
-    Math.ceil((geom.ymax-minY)/geom.dy)-1
-  );
-
-  if (left>right || top>bottom) {
-    throw new Error(
-      'The selected AOI does not overlap the raster extent. Check the GeoTIFF location and coordinate reference system.'
-    );
-  }
-
-  return {left,right,top,bottom,geom};
-}
-
-
-// ============================================================
-// 17. SELECTED AOI PIXEL STATISTICS
-// ============================================================
-
-async function calculateRasterStats(raster,year,token) {
-  if (!selectedFeatures || !selectedFeatures.features.length) {
-    throw new Error('Apply an administrative AOI before processing raster pixels.');
-  }
+  const values = raster.values[0];
+  const height = raster.height;
+  const width = raster.width;
 
   const scheme = getScheme();
-  const allowed = new Set(scheme.map(c=>c.id));
-
-  const selectedBounds = featureCollectionBounds(selectedFeatures);
-  const polygons = prepareSelectedPolygons(selectedFeatures.features);
-
-  const window = getRasterWindow(raster,selectedBounds);
-  const geom = window.geom;
-
   const counts = {};
-  const areas = {};
 
-  scheme.forEach(c=>{
-    counts[c.id] = 0;
-    areas[c.id] = 0;
-  });
+  scheme.forEach(c=>counts[c.id]=0);
 
   let valid = 0;
   let unknown = 0;
-  let insidePixels = 0;
 
-  const rowsToProcess = window.bottom-window.top+1;
+  const allowed = new Set(scheme.map(c=>c.id));
 
-  const candidateColumns = window.right-window.left+1;
-  const candidatePixels = rowsToProcess*candidateColumns;
+  for (let y=0;y<height;y++) {
 
-  if (candidatePixels > 15000000) {
-    throw new Error(
-      `The selected raster window contains ${candidatePixels.toLocaleString()} candidate pixels. Select a smaller administrative area or use a lower-resolution raster.`
-    );
-  }
+    const row = values[y];
 
-  for (let row=window.top;row<=window.bottom;row++) {
-    if (token !== runToken) {
-      throw new Error('Analysis cancelled.');
-    }
+    for (let x=0;x<width;x++) {
 
-    const rasterY = geom.ymax-(row+0.5)*geom.dy;
-
-    for (let col=window.left;col<=window.right;col++) {
-      const raw = getRasterValue(raster,row,col);
+      const raw = row[x];
 
       if (isNoData(raw,raster)) continue;
 
-      const rasterX = geom.xmin+(col+0.5)*geom.dx;
-
-      const geographic = transformPoint(
-        [rasterX,rasterY],
-        geom.crs,
-        'EPSG:4326'
-      );
-
-      const lon = geographic[0];
-      const lat = geographic[1];
-
-      if (!Number.isFinite(lon) || !Number.isFinite(lat)) continue;
-
-      // Crucial spatial filter: pixels outside selected AOI are ignored.
-      if (!featureInside([lon,lat],polygons)) continue;
-
-      insidePixels++;
-
-      const code = Math.round(raw);
+      const code = Math.round(Number(raw));
 
       if (allowed.has(code)) {
         counts[code]++;
         valid++;
-
-        areas[code] += getCellAreaHa(raster,geom,row,col);
       } else {
         unknown++;
       }
     }
 
-    if ((row-window.top)%15===0) {
-      const completed = row-window.top+1;
-      const pct = Math.round(completed/rowsToProcess*100);
-
-      progress(
-        Math.min(85,Math.round(pct*0.85)),
-        `Year ${year}: processing selected AOI • ${pct}%`
-      );
-
-      await yieldBrowser();
+    // Yield periodically so the browser can update progress.
+    if (y % 250 === 0) {
+      await new Promise(resolve=>setTimeout(resolve,0));
     }
   }
 
-  const totalArea = Object.values(areas).reduce((a,b)=>a+b,0);
+  const areaFactor = getRasterAreaFactor(raster);
+
+  const totalArea = areaFactor !== null
+    ? valid * areaFactor
+    : null;
 
   const classes = scheme.map(c=>{
     const count = counts[c.id] || 0;
-    const area = areas[c.id] || 0;
+    const area = areaFactor !== null
+      ? count * areaFactor
+      : null;
 
     return {
       id:c.id,
       name:c.name,
       color:c.color,
       pixels:count,
-      area,
-      percent:valid ? count/valid*100 : 0
+      area:area,
+      percent:valid ? count / valid * 100 : 0
     };
   });
 
   return {
     year,
-    width:raster.width,
-    height:raster.height,
+    width,
+    height,
     projection:raster.projection,
     pixelWidth:raster.pixelWidth,
     pixelHeight:raster.pixelHeight,
+    areaFactor,
     validPixels:valid,
     unknownPixels:unknown,
-    insidePixels,
     totalArea,
-    classes,
-    aoi:selectedName(),
-    candidatePixels
+    classes
   };
 }
 
 
 // ============================================================
-// 18. CLIPPED RASTER MAP DISPLAY
+// 13. DISPLAY SELECTED RASTER
 // ============================================================
 
-function displayClippedRaster(raster) {
-  if (!selectedFeatures || !selectedFeatures.features.length) {
-    throw new Error('No AOI is selected for raster display.');
-  }
+function displayRaster(raster) {
 
   if (rasterLayer) {
     map.removeLayer(rasterLayer);
@@ -1362,121 +1095,59 @@ function displayClippedRaster(raster) {
   }
 
   const scheme = getScheme();
-  const colors = {};
 
+  const colors = {};
   scheme.forEach(c=>colors[c.id]=c.color);
 
-  const bounds = featureCollectionBounds(selectedFeatures);
-  const polygons = prepareSelectedPolygons(selectedFeatures.features);
-  const geom = rasterGeometry(raster);
+  rasterLayer = new GeoRasterLayer({
+    georaster:raster,
+    opacity:0.88,
+    resolution:256,
 
-  const canvas = document.createElement('canvas');
+    pixelValuesToColorFn:function(values) {
+      const value = Number(values[0]);
 
-  // Output image dimensions are deliberately capped for browser performance.
-  const maxDimension = 1100;
-  const aspect = Math.max(
-    0.1,
-    Math.abs((bounds[2]-bounds[0])/(bounds[3]-bounds[1]))
-  );
+      if (!Number.isFinite(value)) return null;
 
-  let canvasWidth = maxDimension;
-  let canvasHeight = Math.round(maxDimension/aspect);
+      const code = Math.round(value);
 
-  if (canvasHeight>maxDimension) {
-    canvasHeight = maxDimension;
-    canvasWidth = Math.round(maxDimension*aspect);
-  }
-
-  canvas.width = Math.max(1,canvasWidth);
-  canvas.height = Math.max(1,canvasHeight);
-
-  const ctx = canvas.getContext('2d');
-  const image = ctx.createImageData(canvas.width,canvas.height);
-
-  for (let py=0;py<canvas.height;py++) {
-    const lat = bounds[3]-(py+0.5)/canvas.height*(bounds[3]-bounds[1]);
-
-    for (let px=0;px<canvas.width;px++) {
-      const lon = bounds[0]+(px+0.5)/canvas.width*(bounds[2]-bounds[0]);
-
-      const index = (py*canvas.width+px)*4;
-
-      if (!featureInside([lon,lat],polygons)) continue;
-
-      const projected = transformPoint(
-        [lon,lat],
-        'EPSG:4326',
-        geom.crs
-      );
-
-      const col = Math.floor((projected[0]-geom.xmin)/geom.dx);
-      const row = Math.floor((geom.ymax-projected[1])/geom.dy);
-
-      if (
-        row<0 || row>=raster.height ||
-        col<0 || col>=raster.width
-      ) continue;
-
-      const raw = getRasterValue(raster,row,col);
-
-      if (isNoData(raw,raster)) continue;
-
-      const code = Math.round(raw);
-      const color = colors[code];
-
-      if (!color) continue;
-
-      const rgb = color.match(/[a-f\d]{2}/gi).map(v=>parseInt(v,16));
-
-      image.data[index] = rgb[0];
-      image.data[index+1] = rgb[1];
-      image.data[index+2] = rgb[2];
-      image.data[index+3] = 225;
+      return colors[code] || 'rgba(0,0,0,0)';
     }
-  }
+  });
 
-  ctx.putImageData(image,0,0);
+  rasterLayer.addTo(map);
 
-  const imageUrl = canvas.toDataURL('image/png');
-
-  rasterLayer = L.imageOverlay(
-    imageUrl,
-    [[bounds[1],bounds[0]],[bounds[3],bounds[2]]],
-    {opacity:0.92,interactive:false}
-  );
-
-  if (el('showRaster').checked) {
-    rasterLayer.addTo(map);
+  if (rasterLayer.getBounds) {
+    map.fitBounds(rasterLayer.getBounds());
   }
 
   el('pixelSize').textContent =
-    `${number(Math.abs(raster.pixelWidth),1)} × ${number(Math.abs(raster.pixelHeight),1)}`;
-
-  // Keep the map focused on the selected administrative area.
-  if (boundaryLayer) {
-    const b = boundaryLayer.getBounds();
-    if (b.isValid()) map.fitBounds(b,{padding:[15,15]});
-  }
+    number(Math.abs(raster.pixelWidth),1) + ' m';
 }
 
 
 // ============================================================
-// 19. CLASS STATISTICS TABLE AND KPIs
+// 14. CLASS STATISTICS TABLE
 // ============================================================
 
 function updateClassTable(stats) {
-  el('classTable').innerHTML = stats.classes.map(c=>`
+
+  const body = el('classTable');
+
+  body.innerHTML = stats.classes.map(c=>`
     <tr>
       <td>
-        <span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:${c.color};margin-right:5px"></span>
+        <span style="display:inline-block;width:9px;height:9px;
+        border-radius:2px;background:${c.color};margin-right:5px"></span>
         ${c.name}
       </td>
-      <td>${number(c.area,1)}</td>
+      <td>${c.area===null?'N/A':number(c.area,1)}</td>
       <td>${number(c.percent,1)}%</td>
     </tr>
   `).join('');
 
-  const find = name=>stats.classes.find(c=>c.name===name);
+  const find = name =>
+    stats.classes.find(c=>c.name===name);
 
   const crop = find('Cropland');
 
@@ -1488,30 +1159,32 @@ function updateClassTable(stats) {
   const water = find('Water');
 
   el('cropArea').textContent =
-    crop ? formatArea(crop.area) : 'N/A';
+    crop && crop.area!==null ? formatArea(crop.area) : 'N/A';
 
   el('vegetationArea').textContent =
-    vegetation.length
+    vegetation.length && stats.areaFactor!==null
       ? formatArea(vegetation.reduce((s,c)=>s+c.area,0))
       : 'N/A';
 
   el('builtArea').textContent =
-    built ? formatArea(built.area) : 'N/A';
+    built && built.area!==null ? formatArea(built.area) : 'N/A';
 
   el('waterArea').textContent =
-    water ? formatArea(water.area) : 'N/A';
+    water && water.area!==null ? formatArea(water.area) : 'N/A';
 }
 
 
 // ============================================================
-// 20. CLASS COMPOSITION CHART
+// 15. CLASS COMPOSITION CHART
 // ============================================================
 
 function drawClassChart(stats) {
+
   if (classChart) classChart.destroy();
 
   classChart = new Chart(el('classChart'),{
     type:'doughnut',
+
     data:{
       labels:stats.classes.map(c=>c.name),
       datasets:[{
@@ -1520,6 +1193,7 @@ function drawClassChart(stats) {
         borderWidth:1
       }]
     },
+
     options:{
       responsive:true,
       maintainAspectRatio:false,
@@ -1530,8 +1204,10 @@ function drawClassChart(stats) {
         },
         tooltip:{
           callbacks:{
-            label:context=>
-              `${context.label}: ${Number(context.raw).toFixed(2)}%`
+            label:function(context) {
+              return context.label + ': ' +
+                Number(context.raw).toFixed(2) + '%';
+            }
           }
         }
       }
@@ -1541,18 +1217,20 @@ function drawClassChart(stats) {
 
 
 // ============================================================
-// 21. ANNUAL TREND CHART
+// 16. ANNUAL CLASS AREA CHART
 // ============================================================
 
 function drawTrendChart() {
+
   const years = YEARS.filter(y=>annualStats[y]);
+
   const scheme = getScheme();
 
   const datasets = scheme.map(c=>({
     label:c.name,
     data:years.map(y=>{
       const cls = annualStats[y].classes.find(x=>x.id===c.id);
-      return cls ? cls.area : null;
+      return cls && cls.area!==null ? cls.area : null;
     }),
     borderColor:c.color,
     backgroundColor:c.color,
@@ -1590,10 +1268,11 @@ function drawTrendChart() {
 
 
 // ============================================================
-// 22. CHANGE CHART
+// 17. COMPARISON CHART
 // ============================================================
 
 function drawChangeChart() {
+
   const year1 = Number(el('compareYear').value);
   const year2 = Number(el('yearSelect').value);
 
@@ -1604,21 +1283,33 @@ function drawChangeChart() {
 
   const scheme = getScheme();
 
+  const labels = scheme.map(c=>c.name);
+
+  const before = scheme.map(c=>{
+    const item = a.classes.find(x=>x.id===c.id);
+    return item?.area ?? null;
+  });
+
+  const after = scheme.map(c=>{
+    const item = b.classes.find(x=>x.id===c.id);
+    return item?.area ?? null;
+  });
+
   if (changeChart) changeChart.destroy();
 
   changeChart = new Chart(el('changeChart'),{
     type:'bar',
     data:{
-      labels:scheme.map(c=>c.name),
+      labels,
       datasets:[
         {
           label:String(year1),
-          data:scheme.map(c=>a.classes.find(x=>x.id===c.id)?.area ?? 0),
+          data:before,
           backgroundColor:'#9eb6a8'
         },
         {
           label:String(year2),
-          data:scheme.map(c=>b.classes.find(x=>x.id===c.id)?.area ?? 0),
+          data:after,
           backgroundColor:'#176b45'
         }
       ]
@@ -1642,95 +1333,63 @@ function drawChangeChart() {
 
 
 // ============================================================
-// 23. RUN ANALYSIS - SELECTED AOI ONLY
+// 18. RUN ANNUAL ANALYSIS
 // ============================================================
 
 async function runAnalysis() {
+
   if (analysisRunning) return;
 
-  if (!selectedFeatures || !selectedFeatures.features.length) {
-    message('Select and apply a region, district or ward before running analysis.');
-    return;
-  }
-
-  const currentKey = [
-    el('regionSelect').value,
-    el('districtSelect').value,
-    el('wardSelect').value
-  ].join('|');
-
-  if (currentKey !== appliedSelectionKey) {
-    message('Your administrative selection has changed. Click APPLY AOI first.');
-    return;
-  }
-
-  if (
-    typeof parseGeoraster !== 'function' ||
-    typeof proj4 !== 'function' ||
-    typeof turf === 'undefined' ||
-    typeof Chart === 'undefined'
-  ) {
-    message('A required mapping library did not load. Refresh the page and check your internet connection.');
-    return;
-  }
-
   analysisRunning = true;
-  const thisRun = ++runToken;
 
   el('runAnalysis').disabled = true;
 
   annualStats = {};
-  selectedStats = null;
-
-  clearCharts();
 
   const selectedYear = Number(el('yearSelect').value);
-  const aoiName = selectedName();
 
   try {
-    status(`Starting analysis for ${aoiName}...`);
+
+    status('Starting annual LULC analysis...');
 
     for (let i=0;i<YEARS.length;i++) {
-      if (thisRun !== runToken) throw new Error('Analysis cancelled.');
 
       const year = YEARS[i];
 
+      const percentage = Math.round(i / YEARS.length * 100);
+
       progress(
-        Math.round(i/YEARS.length*85),
-        `Preparing ${year} for selected AOI...`
+        percentage,
+        'Processing LULC ' + year + '...'
       );
 
-      status(`Analysing ${year} within ${aoiName}...`);
+      status('Downloading and analysing ' + year + ' GeoTIFF...');
 
       const raster = await loadRaster(year);
 
-      if (thisRun !== runToken) throw new Error('Analysis cancelled.');
-
-      const stats = await calculateRasterStats(
-        raster,
-        year,
-        thisRun
-      );
+      const stats = await calculateRasterStats(raster,year);
 
       annualStats[year] = stats;
 
+      // Release the raster after extracting statistics.
+      // The selected map year is loaded again below.
+      if (year === selectedYear) {
+        activeRaster = null;
+      }
+
       progress(
-        Math.round((i+1)/YEARS.length*85),
-        `Completed ${year} • selected AOI only`
+        Math.round((i+1) / YEARS.length * 85),
+        'Completed statistics for ' + year
       );
 
-      await yieldBrowser();
+      await new Promise(resolve=>setTimeout(resolve,20));
     }
 
-    if (thisRun !== runToken) throw new Error('Analysis cancelled.');
-
-    progress(88,'Rendering selected-year clipped map...');
+    progress(88,'Loading selected map year...');
 
     activeRaster = await loadRaster(selectedYear);
 
-    if (thisRun !== runToken) throw new Error('Analysis cancelled.');
-
-    displayClippedRaster(activeRaster);
+    displayRaster(activeRaster);
 
     selectedStats = annualStats[selectedYear];
 
@@ -1739,34 +1398,41 @@ async function runAnalysis() {
     drawTrendChart();
     drawChangeChart();
 
-    progress(100,'Selected AOI analysis completed.');
+    const areaMessage = selectedStats.areaFactor === null
+      ? 'Pixel counts and percentages are available; projected area could not be verified.'
+      : 'Area calculations completed using the raster pixel dimensions.';
+
+    progress(100,'Analysis completed.');
 
     status(
-      `${aoiName} • ${selectedYear} • `+
-      `${selectedStats.validPixels.toLocaleString()} classified pixels inside AOI`
+      'LULC ' + selectedYear +
+      ' displayed • ' +
+      selectedStats.validPixels.toLocaleString() +
+      ' valid classified pixels.'
     );
 
     message(
-      `Analysis completed for ${aoiName}. `+
-      `All six years were processed using only pixels inside the selected area. `+
-      `Pixels outside the selected AOI were excluded.`
+      'Annual classification statistics completed. ' + areaMessage
     );
 
   } catch(error) {
+
     console.error(error);
 
-    if (thisRun === runToken) {
-      status('Analysis failed or was cancelled.');
-      message('Analysis error: '+error.message);
-      progress(0,'Analysis did not complete.');
-    }
+    status('Analysis failed.');
+
+    message(
+      'Error: ' + error.message +
+      '. Check that the GeoTIFF files are accessible in GitHub.'
+    );
+
+    progress(0,'Analysis failed.');
 
   } finally {
-    if (thisRun === runToken) {
-      analysisRunning = false;
-      el('runAnalysis').disabled =
-        !selectedFeatures || !selectedFeatures.features.length;
-    }
+
+    analysisRunning = false;
+    el('runAnalysis').disabled = false;
+
   }
 }
 
@@ -1774,22 +1440,15 @@ el('runAnalysis').onclick = runAnalysis;
 
 
 // ============================================================
-// 24. CHANGE CLASSIFICATION YEAR
+// 19. CHANGE YEAR / CLASS SCHEME
 // ============================================================
 
 el('yearSelect').onchange = async function() {
+
   const year = Number(this.value);
 
-  if (!selectedFeatures) {
-    message('Select an AOI before loading a classification year.');
-    return;
-  }
-
-  if (analysisRunning) {
-    cancelAnalysis('Year changed. Previous analysis cancelled.');
-  }
-
   if (annualStats[year]) {
+
     selectedStats = annualStats[year];
 
     updateClassTable(selectedStats);
@@ -1798,20 +1457,16 @@ el('yearSelect').onchange = async function() {
     drawChangeChart();
 
     try {
-      status(`Loading clipped ${year} map for ${selectedName()}...`);
-
+      status('Loading LULC ' + year + ' map...');
       activeRaster = await loadRaster(year);
-
-      displayClippedRaster(activeRaster);
-
-      status(`${year} clipped LULC displayed for ${selectedName()}.`);
-
+      displayRaster(activeRaster);
+      status('LULC ' + year + ' displayed.');
     } catch(error) {
       message(error.message);
     }
 
   } else {
-    message(`The ${year} statistics have not been calculated. Run analysis again.`);
+    message('Click RUN ANALYSIS to process this year.');
   }
 };
 
@@ -1819,7 +1474,7 @@ el('compareYear').onchange = drawChangeChart;
 
 
 // ============================================================
-// 25. MAP LAYER CONTROLS
+// 20. MAP LAYER CONTROLS
 // ============================================================
 
 el('showBoundary').onchange = function() {
@@ -1827,6 +1482,13 @@ el('showBoundary').onchange = function() {
 
   if (this.checked) boundaryLayer.addTo(map);
   else map.removeLayer(boundaryLayer);
+};
+
+el('showEA').onchange = function() {
+  if (!eaLayer) return;
+
+  if (this.checked) eaLayer.addTo(map);
+  else map.removeLayer(eaLayer);
 };
 
 el('showRaster').onchange = function() {
@@ -1838,17 +1500,17 @@ el('showRaster').onchange = function() {
 
 
 // ============================================================
-// 26. EXPORT SELECTED AOI CLASS CSV
+// 21. EXPORT SELECTED YEAR STATISTICS
 // ============================================================
 
 el('exportClassCSV').onclick = function() {
+
   if (!selectedStats) {
     alert('Run the analysis first.');
     return;
   }
 
   const rows = selectedStats.classes.map(c=>({
-    selected_aoi:selectedStats.aoi,
     year:selectedStats.year,
     class_id:c.id,
     class_name:c.name,
@@ -1858,18 +1520,19 @@ el('exportClassCSV').onclick = function() {
   }));
 
   download(
-    Papa.unparse(rows),
-    'Gambia_Selected_AOI_LULC_'+selectedStats.year+'.csv',
+    Papa.parse ? Papa.unparse(rows) : rows.map(r=>Object.values(r).join(',')).join('\n'),
+    'Gambia_LULC_Statistics_' + selectedStats.year + '.csv',
     'text/csv'
   );
 };
 
 
 // ============================================================
-// 27. EXPORT ANNUAL AOI CSV
+// 22. EXPORT ANNUAL COMPARISON CSV
 // ============================================================
 
 el('exportAnnualCSV').onclick = function() {
+
   const rows = [];
 
   YEARS.forEach(year=>{
@@ -1878,7 +1541,6 @@ el('exportAnnualCSV').onclick = function() {
 
     stats.classes.forEach(c=>{
       rows.push({
-        selected_aoi:stats.aoi,
         year,
         class_id:c.id,
         class_name:c.name,
@@ -1890,36 +1552,31 @@ el('exportAnnualCSV').onclick = function() {
   });
 
   if (!rows.length) {
-    alert('Run the analysis first.');
+    alert('Run analysis first.');
     return;
   }
 
   download(
     Papa.unparse(rows),
-    'Gambia_Selected_AOI_Annual_LULC_2000_2025.csv',
+    'Gambia_LULC_Annual_Comparison_2000_2025.csv',
     'text/csv'
   );
 };
 
 
 // ============================================================
-// 28. EXPORT SELECTED AOI GEOJSON
+// 23. EXPORT SELECTED ADMINISTRATIVE AOI
 // ============================================================
 
 el('exportSelected').onclick = function() {
+
   if (!selectedFeatures || !selectedFeatures.features.length) {
-    alert('Apply an administrative AOI first.');
+    alert('Select an administrative area first.');
     return;
   }
 
-  const output = {
-    type:'FeatureCollection',
-    name:'Gambia_Selected_AOI',
-    features:selectedFeatures.features
-  };
-
   download(
-    JSON.stringify(output,null,2),
+    JSON.stringify(selectedFeatures,null,2),
     'Gambia_Selected_AOI.geojson',
     'application/geo+json'
   );
@@ -1927,76 +1584,77 @@ el('exportSelected').onclick = function() {
 
 
 // ============================================================
-// 29. RESET DASHBOARD
+// 24. RESET
 // ============================================================
 
 el('resetDashboard').onclick = function() {
-  if (analysisRunning) {
-    cancelAnalysis('Dashboard reset.');
-  }
-
-  if (rasterLayer) map.removeLayer(rasterLayer);
-  if (boundaryLayer) map.removeLayer(boundaryLayer);
-
-  rasterLayer = null;
-  boundaryLayer = null;
-
-  selectedFeatures = null;
-  appliedSelectionKey = '';
-
-  clearAnalysisResults();
 
   el('regionSelect').value = '';
-  setOptions(el('districtSelect'),[],'Select a district');
-  setOptions(el('wardSelect'),[],'Select a ward');
+  el('districtSelect').value = '';
+  el('wardSelect').value = '';
 
-  el('districtSelect').disabled = true;
-  el('wardSelect').disabled = true;
-  el('applyArea').disabled = true;
+  updateDistricts();
 
-  el('runAnalysis').disabled = true;
-  el('zoomAOI').disabled = true;
+  selectedFeatures = null;
+  annualStats = {};
+  selectedStats = null;
 
-  el('selectionSummary').innerHTML =
-    '<strong>No AOI selected.</strong><br>Select a region, district or ward.';
+  if (rasterLayer) map.removeLayer(rasterLayer);
+
+  rasterLayer = null;
+  activeRaster = null;
+
+  el('classTable').innerHTML =
+    '<tr><td colspan="3">Run analysis to populate statistics.</td></tr>';
+
+  ['cropArea','vegetationArea','builtArea','waterArea'].forEach(id=>{
+    el(id).textContent = '—';
+  });
+
+  el('progressBar').style.width = '0%';
+  el('progressText').textContent = 'Ready.';
 
   updateAdministrativeStats();
 
-  map.setView([13.45,-15.4],8);
-
-  status('Dashboard reset. Select an AOI to begin.');
   message('Dashboard reset. Repository data remain connected.');
+
+  map.setView([13.45,-15.4],8);
 };
 
 
 // ============================================================
-// 30. STARTUP
+// 25. STARTUP
 // ============================================================
 
 async function initialise() {
+
   try {
+
     progress(5,'Connecting to GitHub...');
 
     await loadBoundaries();
 
-    progress(10,'Boundary data loaded. Select an AOI.');
+    progress(10,'Boundary loaded. Ready for LULC analysis.');
 
-    status('GitHub connected. Select a region, district or ward.');
+    status('GitHub connected. Choose a year and run analysis.');
+
+    message(
+      'Repository connected successfully. Click RUN ANALYSIS to calculate LULC statistics for all six available years.'
+    );
 
   } catch(error) {
+
     console.error(error);
 
     el('connectionStatus').textContent =
-      'Connection error: '+error.message;
+      'Connection error: ' + error.message;
 
     status('Could not load repository data.');
 
     message(
-      'Check the repository URL, branch and boundary filename. '+
+      'Check the repository URL, branch and file names. ' +
       error.message
     );
-
-    progress(0,'Repository connection failed.');
   }
 }
 
@@ -2005,7 +1663,6 @@ initialise();
 console.log('GBoS GEOAI — Gambia Agricultural Intelligence');
 console.log('Repository:',RAW);
 console.log('Available LULC years:',YEARS);
-console.log('Spatial processing: selected AOI only');
 
 </script>
 </body>
